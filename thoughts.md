@@ -32,4 +32,4 @@ TIME NOW: 01:50
 
 so im clocking out for now, its almost 2am , and i am tired, so thank you for watching and peace.
 
-[ ⚠️ ] i forgot to initialize my repo.
+[ ⚠️ ][ 📍›✔️ ] i forgot to initialize, commmit and publish my repo.
