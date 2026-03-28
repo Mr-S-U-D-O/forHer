@@ -129,3 +129,83 @@ document.addEventListener("DOMContentLoaded", () => {
         { opacity: 1, scale: 1, y: 0, duration: 0.7, stagger: 0.15, ease: "back.out(1.2)" },
         "-=0.4"
     );
+
+    // --- SECTION 4: TABS & ACCORDION LOGIC --- //
+
+    // 1. Scroll Animations (Same as before)
+    const highlightsTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".highlights-section",
+            start: "top 75%",
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    highlightsTl.fromTo(".section-header-row .section-heading", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 })
+      .fromTo(".section-header-row .heading-line", { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, "-=0.3")
+      .fromTo(".sidebar-item", { opacity: 0, x: -20 }, { opacity: 1, x: 0, stagger: 0.1, duration: 0.5 }, "-=0.5")
+      .fromTo(".vertical-divider", { scaleY: 0, transformOrigin: "top center" }, { scaleY: 1, duration: 0.6 }, "-=0.4")
+      .fromTo(".tab-pane.active .accordion-item", { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.1, duration: 0.5 }, "-=0.4");
+
+    // 2. Tab Switching Logic
+    const tabTriggers = document.querySelectorAll(".sidebar-item");
+    const tabPanes = document.querySelectorAll(".tab-pane");
+
+    tabTriggers.forEach(trigger => {
+        trigger.addEventListener("click", () => {
+            // Remove active class from all triggers
+            tabTriggers.forEach(t => t.classList.remove("active"));
+            // Add active class to clicked trigger
+            trigger.classList.add("active");
+
+            // Get target tab ID
+            const targetId = trigger.getAttribute("data-tab");
+
+            // Hide all panes
+            tabPanes.forEach(pane => {
+                pane.classList.remove("active");
+            });
+
+            // Show target pane
+            const targetPane = document.getElementById(targetId);
+            targetPane.classList.add("active");
+
+            // Optional: Re-trigger GSAP animation for the newly shown accordion items
+            gsap.fromTo(targetPane.querySelectorAll(".accordion-item"), 
+                { opacity: 0, y: 15 }, 
+                { opacity: 1, y: 0, stagger: 0.1, duration: 0.4, ease: "power2.out" }
+            );
+        });
+    });
+
+    // 3. Accordion Logic (Updated to handle items across all tabs)
+    const allAccordionHeaders = document.querySelectorAll(".accordion-header");
+
+    allAccordionHeaders.forEach(header => {
+        header.addEventListener("click", function() {
+            const item = this.parentElement;
+            const content = item.querySelector(".accordion-content");
+            const inner = item.querySelector(".accordion-inner");
+            const isOpen = item.classList.contains("is-open");
+            const currentTab = item.closest(".tab-pane"); // Get the tab pane this item belongs to
+
+            // Close other accordions *only within the same tab pane*
+            currentTab.querySelectorAll(".accordion-item").forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains("is-open")) {
+                    otherItem.classList.remove("is-open");
+                    const otherContent = otherItem.querySelector(".accordion-content");
+                    gsap.to(otherContent, { height: 0, duration: 0.4, ease: "power2.inOut" });
+                }
+            });
+
+            // Toggle current accordion
+            if (!isOpen) {
+                item.classList.add("is-open");
+                const targetHeight = inner.offsetHeight; 
+                gsap.to(content, { height: targetHeight, duration: 0.4, ease: "power2.inOut" });
+            } else {
+                item.classList.remove("is-open");
+                gsap.to(content, { height: 0, duration: 0.4, ease: "power2.inOut" });
+            }
+        });
+    });
