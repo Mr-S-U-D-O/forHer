@@ -53,3 +53,79 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.to(backdrop, { top: 20, left: 20, duration: 0.3, ease: "power2.out" });
   });
 });
+
+
+// Ensure ScrollTrigger is registered
+    gsap.registerPlugin(ScrollTrigger);
+
+    // --- SECTION 2 ANIMATIONS --- //
+    
+    const journeyTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".journey-section",
+            start: "top 75%", // Triggers when the top of the section hits 75% down the viewport
+            toggleActions: "play none none reverse" // Plays on scroll down, reverses on scroll back up
+        }
+    });
+
+    // 1. Reveal the tall image stretching up
+    journeyTl.fromTo(".journey-image-tall",
+        { opacity: 0, clipPath: "inset(100% 0 0 0)" }, // Starts clipped to the bottom
+        { opacity: 1, clipPath: "inset(0% 0 0 0)", duration: 1.2, ease: "power4.out" }
+    );
+
+    // 2. Slide in the text content
+    journeyTl.fromTo(".journey-content > h2, .journey-content > p",
+        { opacity: 0, x: 40 },
+        { opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: "power3.out" },
+        "-=0.8" // Overlap with image reveal
+    );
+
+    // 3. Pop in the small image with a slight rotation
+    journeyTl.fromTo(".journey-image-small",
+        { opacity: 0, scale: 0.8, rotation: 5 },
+        { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.5)" },
+        "-=0.4"
+    );
+
+    // Hover effect for the small image
+    const smallImage = document.querySelector(".journey-image-small");
+    smallImage.addEventListener("mouseenter", () => {
+        gsap.to(smallImage, { rotation: -3, scale: 1.02, duration: 0.3 });
+    });
+    smallImage.addEventListener("mouseleave", () => {
+        gsap.to(smallImage, { rotation: 0, scale: 1, duration: 0.3 });
+    });
+
+    // --- SECTION 3 ANIMATIONS --- //
+    
+    const galleryTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".gallery-section",
+            start: "top 75%", 
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    // 1. Animate the Heading Text
+    galleryTl.fromTo(".gallery-header .section-heading",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+    );
+
+    // 2. Animate the Line stretching out next to the heading
+    galleryTl.fromTo(".heading-line",
+        { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
+        "-=0.3"
+    );
+
+    // 3. Stagger the grid items popping in
+    // Using an elastic 'back' ease makes them bounce slightly when they appear
+    const gridItems = gsap.utils.toArray(".grid-item");
+    
+    galleryTl.fromTo(gridItems,
+        { opacity: 0, scale: 0.8, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.7, stagger: 0.15, ease: "back.out(1.2)" },
+        "-=0.4"
+    );

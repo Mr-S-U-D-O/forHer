@@ -152,3 +152,210 @@ body {
         left: 10px;
     }
 }
+
+/* 
+=========================|
+    SECTION 2: JOURNEY   |
+=========================|
+*/
+
+.journey-section {
+    margin-top: 8rem; /* Creates breathing room from the hero section */
+    padding-top: 2rem;
+}
+
+.journey-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start; /* Aligns items to the top rather than center */
+}
+
+/* Typography styles to be reused in future sections */
+.section-heading {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-paragraph {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+/* Image Wrappers & Styles */
+.journey-image-tall-wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+}
+
+.journey-image-tall {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: var(--border);
+    border-radius: var(--radius);
+    background-color: var(--secondary-color);
+    box-shadow: 8px 8px 0px rgba(165, 42, 214, 0.2); /* Subtle offset shadow */
+}
+
+.journey-image-small-wrapper {
+    width: 85%; /* Keeps it slightly inset compared to the text width, matching the sketch */
+}
+
+.journey-image-small {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Creates a perfect square or you can use 4/3 */
+    object-fit: cover;
+    border: var(--border);
+    border-radius: var(--radius);
+    background-color: var(--secondary-color);
+    box-shadow: -6px 6px 0px rgba(50, 12, 64, 0.15); /* Opposite offset shadow for balance */
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+    .journey-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .journey-image-tall-wrapper {
+        min-height: 400px;
+    }
+
+    .journey-image-small-wrapper {
+        width: 100%;
+    }
+}
+
+/* 
+=========================|
+    SECTION 3: GALLERY   |
+=========================|
+*/
+
+.gallery-section {
+    margin-top: 8rem;
+    padding-top: 2rem;
+}
+
+/* Flexbox layout for the heading + line */
+.gallery-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.gallery-header .section-heading {
+    margin-bottom: 0; /* Resetting the margin from the global class */
+    white-space: nowrap; /* Prevents heading from wrapping oddly */
+}
+
+/* The expanding line next to the heading */
+.heading-line {
+    flex-grow: 1; /* Takes up remaining space */
+    height: var(--border-width);
+    background-color: var(--primary-color);
+}
+
+/* The Outer Border Container for the Grid */
+.gallery-grid-container {
+    border: var(--border);
+    padding: 1rem;
+    border-radius: var(--radius);
+    
+    /* CSS Grid Magic */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 250px); /* Sets row heights */
+    gap: 1rem;
+    background-color: var(--bg-color); 
+}
+
+/* Grid Items General Styling */
+.grid-item {
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    border: var(--border);
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Hover effect for all images in the grid */
+.grid-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Assigning specific grid areas based on the sketch */
+.grid-text-box {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    background-color: transparent; /* Makes it light pink (shows container bg) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+.grid-text-box p {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.grid-img-square {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    background-color: var(--secondary-color);
+}
+
+.grid-img-wide {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    background-color: var(--secondary-color);
+}
+
+.grid-img-tall {
+    grid-column: 3 / 4;
+    grid-row: 1 / 3;
+    background-color: var(--secondary-color);
+}
+
+/* Responsive Grid for Tablets and Mobile */
+@media (max-width: 900px) {
+    .gallery-grid-container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto; 
+    }
+    .grid-text-box { grid-column: 1 / 2; grid-row: 1 / 2; min-height: 200px; }
+    .grid-img-square { grid-column: 2 / 3; grid-row: 1 / 2; min-height: 200px; }
+    .grid-img-wide { grid-column: 1 / 3; grid-row: 2 / 3; min-height: 250px;}
+    .grid-img-tall { grid-column: 1 / 3; grid-row: 3 / 4; min-height: 400px; }
+}
+
+@media (max-width: 600px) {
+    .gallery-grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    .grid-item {
+        grid-column: 1 / -1 !important;
+        grid-row: auto !important;
+        min-height: 250px;
+    }
+}
