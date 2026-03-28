@@ -33,6 +33,14 @@
   /* Utilities */
   --transition-speed: 0.3s;
   --radius: 4px;
+
+  /* Navigation wire tokens */
+  --wire-color: #320c40;
+  --wire-thickness: 2px;
+  --wire-gap: 1.15rem;
+  --wire-offset: 2rem;
+  --wire-drop-height: 2rem;
+  
 }
 
 /* --- THE RESET --- */

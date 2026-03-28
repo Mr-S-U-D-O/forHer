@@ -35,17 +35,46 @@ body {
 }
 
 .nav-bracket {
-  --wire-color: #d62976;
-  --wire-thickness: 2px;
-  --wire-gap: 1.15rem;
-  --wire-offset: 1rem;
-  --wire-drop-height: 1.45rem;
-  --wire-corner-radius: 3px;
-
   position: relative;
   margin-top: -2px;
   padding: 0.8rem 1rem 0.4rem;
   background: var(--bg-color);
+}
+
+/* Mask the page top border where the nav frame sits so only one frame path is visible */
+.nav-bracket::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -4px;
+  right: -4px;
+  height: 4px;
+  background: var(--bg-color);
+  z-index: 0;
+}
+
+.nav-bracket > * {
+  position: relative;
+  z-index: 1;
+}
+
+.main-nav {
+  position: relative;
+}
+
+/* Top roof line for the dip frame (separate from the button wire) */
+.main-nav::before {
+  content: "";
+  position: absolute;
+  top: calc(50% - var(--wire-drop-height));
+  left: calc(var(--wire-offset) * -1);
+  right: calc(var(--wire-offset) * -1);
+  height: var(--wire-thickness);
+  background-color: var(--wire-color);
+  border-radius: var(--wire-corner-radius);
+  transform: translateY(calc(var(--wire-thickness) * -1));
+  z-index: 0;
+  pointer-events: none;
 }
 
 .nav-wire {
@@ -63,9 +92,10 @@ body {
   background-color: var(--wire-color);
   transform: translateY(-50%);
   z-index: 0;
+  pointer-events: none;
 }
 
-/* Roof + equal left/right drops with slight outer offset */
+/* Side drops only: open dip shape (no top edge/closed rectangle) */
 .nav-wire::after {
   content: "";
   position: absolute;
@@ -73,11 +103,11 @@ body {
   left: calc(var(--wire-offset) * -1);
   right: calc(var(--wire-offset) * -1);
   height: var(--wire-drop-height);
-  border-top: var(--wire-thickness) solid var(--wire-color);
   border-left: var(--wire-thickness) solid var(--wire-color);
   border-right: var(--wire-thickness) solid var(--wire-color);
   border-radius: var(--wire-corner-radius) var(--wire-corner-radius) 0 0;
   z-index: 0;
+  pointer-events: none;
 }
 
 .main-nav ul {
@@ -91,7 +121,7 @@ body {
 
 .nav-pill {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   display: inline-block;
   background-color: var(--wire-color);
   color: var(--bg-color);
@@ -107,10 +137,14 @@ body {
   letter-spacing: 1px;
 }
 
-.nav-pill:hover, 
+.nav-pill:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
 .nav-pill.active {
   background-color: var(--primary-color);
-  transform: translateY(-3px);
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -136,7 +170,9 @@ body {
   width: 20px;
   height: 2px;
   background-color: var(--primary-color);
-  transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
+  transition:
+    transform var(--transition-speed) ease,
+    opacity var(--transition-speed) ease;
 }
 
 .nav-bracket.menu-open .nav-toggle span:nth-child(1) {
@@ -239,6 +275,10 @@ body {
     display: none;
   }
 
+  .main-nav::before {
+    display: none;
+  }
+
   .nav-toggle {
     display: inline-flex;
   }
@@ -256,7 +296,9 @@ body {
     opacity: 0;
     transform: translateY(-12px);
     pointer-events: none;
-    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+    transition:
+      opacity var(--transition-speed) ease,
+      transform var(--transition-speed) ease;
     z-index: 25;
   }
 
