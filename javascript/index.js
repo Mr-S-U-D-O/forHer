@@ -1,5 +1,46 @@
 // Wait for DOM to load
 document.addEventListener("DOMContentLoaded", () => {
+    const navBracket = document.querySelector(".nav-bracket");
+    const navToggle = document.querySelector(".nav-toggle");
+    const mainNav = document.getElementById("primary-nav");
+    const navLinks = document.querySelectorAll(".main-nav .nav-pill");
+
+    if (navBracket && navToggle && mainNav) {
+        const closeMenu = () => {
+            navBracket.classList.remove("menu-open");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.setAttribute("aria-label", "Open navigation menu");
+        };
+
+        navToggle.addEventListener("click", () => {
+            const isOpen = navBracket.classList.toggle("menu-open");
+            navToggle.setAttribute("aria-expanded", String(isOpen));
+            navToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Close navigation menu" : "Open navigation menu",
+            );
+        });
+
+        navLinks.forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
+
+        document.addEventListener("click", (event) => {
+            if (
+                navBracket.classList.contains("menu-open") &&
+                !navBracket.contains(event.target)
+            ) {
+                closeMenu();
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+    }
+
   // Set up initial GSAP timeline
   const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 

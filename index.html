@@ -28,50 +28,62 @@
   <body class="container-cursor-1">
     <main class="page-container">
       <!-- UPDATED NAVIGATION -->
+      <!-- NAVIGATION -->
       <header class="site-header">
         <div class="nav-bracket">
-          <nav class="main-nav">
-            <!-- The line that connects the tabs -->
-            <div class="nav-line"></div>
-            <ul>
-              <!-- Added cursor hover classes and data attributes -->
-              <li>
-                <a
-                  href="#me"
-                  class="nav-pill active cursor-hover-item"
-                  data-cursor-text=" ME "
-                  data-cursor-text-repeat="5"
-                  >Me</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#family"
-                  class="nav-pill cursor-hover-item"
-                  data-cursor-text=" FAMILY "
-                  data-cursor-text-repeat="3"
-                  >My family</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#bff"
-                  class="nav-pill cursor-hover-item"
-                  data-cursor-text=" BFF "
-                  data-cursor-text-repeat="4"
-                  >My BFF</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#him"
-                  class="nav-pill cursor-hover-item"
-                  data-cursor-text=" HIM "
-                  data-cursor-text-repeat="4"
-                  >HIM</a
-                >
-              </li>
-            </ul>
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="primary-nav"
+            aria-label="Open navigation menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <nav class="main-nav" id="primary-nav">
+            <div class="nav-wire">
+              <ul>
+                <li>
+                  <a
+                    href="#me"
+                    class="nav-pill active cursor-hover-item"
+                    data-cursor-text=" ME "
+                    data-cursor-text-repeat="5"
+                    >Me</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#family"
+                    class="nav-pill cursor-hover-item"
+                    data-cursor-text=" FAMILY "
+                    data-cursor-text-repeat="3"
+                    >My family</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#bff"
+                    class="nav-pill cursor-hover-item"
+                    data-cursor-text=" BFF "
+                    data-cursor-text-repeat="4"
+                    >My BFF</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#him"
+                    class="nav-pill cursor-hover-item"
+                    data-cursor-text=" HIM "
+                    data-cursor-text-repeat="4"
+                    >HIM</a
+                  >
+                </li>
+              </ul>
+            </div>
           </nav>
         </div>
       </header>
@@ -222,9 +234,10 @@
             <div class="tab-pane active" id="tab-academics">
               <div class="accordion-item is-open">
                 <button class="accordion-header">
-                  <span class="accordion-title">Dean's List (Against All Odds)</span>
+                  <span class="accordion-title"
+                    >Dean's List (Against All Odds)</span
+                  >
                   <span class="accordion-icon">
-                    
                     <svg
                       width="24"
                       height="24"
@@ -236,8 +249,9 @@
                       stroke-linejoin="round"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="8 12 12 16 16 12"></polyline></svg>
-                    </span>
+                      <polyline points="8 12 12 16 16 12"></polyline>
+                    </svg>
+                  </span>
                 </button>
                 <div class="accordion-content" style="height: auto">
                   <div class="accordion-inner">
@@ -265,7 +279,8 @@
                       stroke-linejoin="round"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="8 12 12 16 16 12"></polyline></svg></span>
+                      <polyline points="8 12 12 16 16 12"></polyline></svg
+                  ></span>
                 </button>
 
                 <div class="accordion-content">
@@ -298,7 +313,8 @@
                       stroke-linejoin="round"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="8 12 12 16 16 12"></polyline></svg></span>
+                      <polyline points="8 12 12 16 16 12"></polyline></svg
+                  ></span>
                 </button>
                 <div class="accordion-content">
                   <div class="accordion-inner">
@@ -325,7 +341,8 @@
                       stroke-linejoin="round"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="8 12 12 16 16 12"></polyline></svg></span>
+                      <polyline points="8 12 12 16 16 12"></polyline></svg
+                  ></span>
                 </button>
                 <div class="accordion-content">
                   <div class="accordion-inner">

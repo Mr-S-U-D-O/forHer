@@ -22,7 +22,7 @@ body {
 
 /* 
 =========================|
-    NAVIGATION           |
+    NAVIGATION (v2)      |
 =========================|
 */
 
@@ -30,45 +30,125 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 5rem;
+  position: relative;
+  z-index: 10;
 }
 
-/* Creating the bracket line above the nav from the sketch */
 .nav-bracket {
-  border-bottom: var(--border);
-  border-left: var(--border);
-  border-right: var(--border);
-  padding: 1rem 2rem;
-  margin-top: -2px; /* Pull it up to overlap the main container top border */
+  --wire-color: #d62976;
+  --wire-thickness: 2px;
+  --wire-gap: 1.15rem;
+  --wire-offset: 1rem;
+  --wire-drop-height: 1.45rem;
+  --wire-corner-radius: 3px;
+
+  position: relative;
+  margin-top: -2px;
+  padding: 0.8rem 1rem 0.4rem;
   background: var(--bg-color);
+}
+
+.nav-wire {
+  position: relative;
+}
+
+/* Continuous horizontal wire across all buttons */
+.nav-wire::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(var(--wire-offset) * -1);
+  right: calc(var(--wire-offset) * -1);
+  height: var(--wire-thickness);
+  background-color: var(--wire-color);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+/* Roof + equal left/right drops with slight outer offset */
+.nav-wire::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - var(--wire-drop-height));
+  left: calc(var(--wire-offset) * -1);
+  right: calc(var(--wire-offset) * -1);
+  height: var(--wire-drop-height);
+  border-top: var(--wire-thickness) solid var(--wire-color);
+  border-left: var(--wire-thickness) solid var(--wire-color);
+  border-right: var(--wire-thickness) solid var(--wire-color);
+  border-radius: var(--wire-corner-radius) var(--wire-corner-radius) 0 0;
+  z-index: 0;
 }
 
 .main-nav ul {
   display: flex;
-  gap: 1rem;
   align-items: center;
+  gap: var(--wire-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-pill {
+  position: relative;
+  z-index: 1;
   display: inline-block;
-  background-color: var(--secondary-color);
+  background-color: var(--wire-color);
   color: var(--bg-color);
   font-family: var(--font-heading);
   font-weight: bold;
   font-size: 1.1rem;
   text-decoration: none;
   padding: 0.5rem 1.5rem;
-  border-radius: 8px; /* Slightly blocky to match sketch */
+  border-radius: 8px;
   border: 2px solid transparent;
   transition: all var(--transition-speed) ease;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-.nav-pill:hover,
+.nav-pill:hover, 
 .nav-pill.active {
   background-color: var(--primary-color);
   transform: translateY(-3px);
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.nav-toggle {
+  display: none;
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 42px;
+  height: 42px;
+  border: var(--border);
+  border-radius: 6px;
+  background-color: var(--bg-color);
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 30;
+}
+
+.nav-toggle span {
+  width: 20px;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease;
+}
+
+.nav-bracket.menu-open .nav-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-bracket.menu-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-bracket.menu-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* 
@@ -139,14 +219,73 @@ body {
   .page-container {
     padding: 0 1.5rem 2rem 1.5rem;
   }
+
+  .site-header {
+    justify-content: flex-end;
+    margin-bottom: 3.2rem;
+  }
+
+  .nav-bracket {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    margin-top: 0.4rem;
+    background: transparent;
+  }
+
+  .nav-wire::before,
+  .nav-wire::after {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 3.3rem;
+    right: 0.25rem;
+    width: min(280px, 88vw);
+    border: var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-color);
+    box-shadow: 0 14px 28px rgba(50, 12, 64, 0.18);
+    padding: 0.8rem;
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+    z-index: 25;
+  }
+
+  .nav-bracket.menu-open .main-nav {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
   .hero-section {
     grid-template-columns: 1fr;
     text-align: center;
   }
+
   .main-nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
   }
+
+  .main-nav li {
+    width: 100%;
+  }
+
+  .nav-pill {
+    width: 100%;
+    text-align: center;
+  }
+
   .hero-image-backdrop {
     top: 10px;
     left: 10px;
