@@ -1,10 +1,41 @@
-// Wait for DOM to load
+// Register plugins once so all timelines can use ScrollTrigger.
+gsap.registerPlugin(ScrollTrigger);
+
+// Utility: animate heading rows the same way for visual continuity.
+const animateHeadingRow = (selector) => {
+  const heading = document.querySelector(`${selector} .section-heading`);
+  const line = document.querySelector(`${selector} .heading-line`);
+
+  if (!heading || !line) return;
+
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: selector,
+        start: "top 84%",
+        toggleActions: "play none none reverse",
+      },
+    })
+    .fromTo(
+      heading,
+      { opacity: 0, y: 30, skewY: 2 },
+      { opacity: 1, y: 0, skewY: 0, duration: 1, ease: "power4.out" },
+    )
+    .fromTo(
+      line,
+      { scaleX: 0, transformOrigin: "left center" },
+      { scaleX: 1, duration: 1.1, ease: "power3.inOut" },
+      "-=0.35",
+    );
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const navBracket = document.querySelector(".nav-bracket");
   const navToggle = document.querySelector(".nav-toggle");
   const mainNav = document.getElementById("primary-nav");
   const navLinks = document.querySelectorAll(".main-nav .nav-pill");
 
+  // Mobile navigation interactions.
   if (navBracket && navToggle && mainNav) {
     const closeMenu = () => {
       navBracket.classList.remove("menu-open");
@@ -21,9 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
 
-    navLinks.forEach((link) => {
-      link.addEventListener("click", closeMenu);
-    });
+    navLinks.forEach((link) => link.addEventListener("click", closeMenu));
 
     document.addEventListener("click", (event) => {
       if (
@@ -35,269 +64,439 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 768) {
-        closeMenu();
-      }
+      if (window.innerWidth > 768) closeMenu();
     });
   }
 
-  // Set up initial GSAP timeline
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  // Entrance sequence for the top of the page.
+  const introTl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-  // 1. Animate the Main Container Border (draws it in)
   gsap.fromTo(
     ".page-container",
     { opacity: 0, y: 30 },
     { opacity: 1, y: 0, duration: 1 },
   );
 
-  // 2. Animate the Navigation Pills popping in one by one
-  tl.fromTo(
-    ".nav-pill",
-    { opacity: 0, y: -20, scale: 0.8 },
-    { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1 },
-  );
+  introTl
+    .fromTo(
+      ".nav-pill",
+      { opacity: 0, y: -20, scale: 0.8 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.72, stagger: 0.11 },
+    )
+    .fromTo(
+      ".hero-content > *",
+      { opacity: 0, x: -55 },
+      { opacity: 1, x: 0, duration: 0.9, stagger: 0.2 },
+      "-=0.2",
+    )
+    .fromTo(
+      ".hero-image",
+      { opacity: 0, scale: 0.82, rotation: -5 },
+      {
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        duration: 1.25,
+        ease: "power3.out",
+      },
+      "-=0.45",
+    )
+    .fromTo(
+      ".hero-image-backdrop",
+      { top: 0, left: 0 },
+      { top: 20, left: 20, duration: 0.72 },
+      "-=0.5",
+    );
 
-  // 3. Slide in the Hero Text (Title, Date, Desc)
-  tl.fromTo(
-    ".hero-content > *",
-    { opacity: 0, x: -50 },
-    { opacity: 1, x: 0, duration: 0.6, stagger: 0.15 },
-    "-=0.2", // Overlap slightly with the nav animation
-  );
+  // Chapter transition overlays animate like a pulse between scenes.
+  gsap.utils.toArray(".story-transition span").forEach((line) => {
+    gsap.fromTo(
+      line,
+      { scaleX: 0, opacity: 0.2, transformOrigin: "left center" },
+      {
+        scaleX: 1,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: line.parentElement,
+          start: "top 90%",
+          end: "bottom 40%",
+          scrub: 0.8,
+        },
+      },
+    );
+  });
 
-  // 4. Pop in the Hero Image
-  tl.fromTo(
-    ".hero-image",
-    { opacity: 0, scale: 0.8, rotation: -5 },
-    { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.7)" },
-    "-=0.4",
-  );
-
-  // 5. Slide out the offset backdrop behind the image
-  tl.fromTo(
-    ".hero-image-backdrop",
-    { top: 0, left: 0 },
-    { top: 20, left: 20, duration: 0.5 },
-    "-=0.5",
-  );
-
-  // Interactive Hover Animation for the Image
+  // Hero hover motion keeps the header alive without being distracting.
   const imgWrapper = document.querySelector(".hero-image-wrapper");
   const backdrop = document.querySelector(".hero-image-backdrop");
 
-  imgWrapper.addEventListener("mouseenter", () => {
-    gsap.to(backdrop, { top: 30, left: 30, duration: 0.3, ease: "power2.out" });
-  });
-
-  imgWrapper.addEventListener("mouseleave", () => {
-    gsap.to(backdrop, { top: 20, left: 20, duration: 0.3, ease: "power2.out" });
-  });
-});
-
-// Ensure ScrollTrigger is registered
-gsap.registerPlugin(ScrollTrigger);
-
-// --- SECTION 2 ANIMATIONS --- //
-
-const journeyTl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".journey-section",
-    start: "top 75%", // Triggers when the top of the section hits 75% down the viewport
-    toggleActions: "play none none reverse", // Plays on scroll down, reverses on scroll back up
-  },
-});
-
-// 1. Reveal the tall image stretching up
-journeyTl.fromTo(
-  ".journey-image-tall",
-  { opacity: 0, clipPath: "inset(100% 0 0 0)" }, // Starts clipped to the bottom
-  {
-    opacity: 1,
-    clipPath: "inset(0% 0 0 0)",
-    duration: 1.2,
-    ease: "power4.out",
-  },
-);
-
-// 2. Slide in the text content
-journeyTl.fromTo(
-  ".journey-content > h2, .journey-content > p",
-  { opacity: 0, x: 40 },
-  { opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: "power3.out" },
-  "-=0.8", // Overlap with image reveal
-);
-
-// 3. Pop in the small image with a slight rotation
-journeyTl.fromTo(
-  ".journey-image-small",
-  { opacity: 0, scale: 0.8, rotation: 5 },
-  { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.5)" },
-  "-=0.4",
-);
-
-// Hover effect for the small image
-const smallImage = document.querySelector(".journey-image-small");
-smallImage.addEventListener("mouseenter", () => {
-  gsap.to(smallImage, { rotation: -3, scale: 1.02, duration: 0.3 });
-});
-smallImage.addEventListener("mouseleave", () => {
-  gsap.to(smallImage, { rotation: 0, scale: 1, duration: 0.3 });
-});
-
-// --- SECTION 3 ANIMATIONS --- //
-
-const galleryTl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".gallery-section",
-    start: "top 75%",
-    toggleActions: "play none none reverse",
-  },
-});
-
-// 1. Animate the Heading Text
-galleryTl.fromTo(
-  ".gallery-header .section-heading",
-  { opacity: 0, y: 20 },
-  { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-);
-
-// 2. Animate the Line stretching out next to the heading
-galleryTl.fromTo(
-  ".heading-line",
-  { scaleX: 0, transformOrigin: "left center" },
-  { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
-  "-=0.3",
-);
-
-// 3. Stagger the grid items popping in
-// Using an elastic 'back' ease makes them bounce slightly when they appear
-const gridItems = gsap.utils.toArray(".grid-item");
-
-galleryTl.fromTo(
-  gridItems,
-  { opacity: 0, scale: 0.8, y: 30 },
-  {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    duration: 0.7,
-    stagger: 0.15,
-    ease: "back.out(1.2)",
-  },
-  "-=0.4",
-);
-
-// --- SECTION 4: TABS & ACCORDION LOGIC --- //
-
-// 1. Scroll Animations (Same as before)
-const highlightsTl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".highlights-section",
-    start: "top 75%",
-    toggleActions: "play none none reverse",
-  },
-});
-
-highlightsTl
-  .fromTo(
-    ".section-header-row .section-heading",
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.6 },
-  )
-  .fromTo(
-    ".section-header-row .heading-line",
-    { scaleX: 0, transformOrigin: "left center" },
-    { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
-    "-=0.3",
-  )
-  .fromTo(
-    ".sidebar-item",
-    { opacity: 0, x: -20 },
-    { opacity: 1, x: 0, stagger: 0.1, duration: 0.5 },
-    "-=0.5",
-  )
-  .fromTo(
-    ".vertical-divider",
-    { scaleY: 0, transformOrigin: "top center" },
-    { scaleY: 1, duration: 0.6 },
-    "-=0.4",
-  )
-  .fromTo(
-    ".tab-pane.active .accordion-item",
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, stagger: 0.1, duration: 0.5 },
-    "-=0.4",
-  );
-
-// 2. Tab Switching Logic
-const tabTriggers = document.querySelectorAll(".sidebar-item");
-const tabPanes = document.querySelectorAll(".tab-pane");
-
-tabTriggers.forEach((trigger) => {
-  trigger.addEventListener("click", () => {
-    // Remove active class from all triggers
-    tabTriggers.forEach((t) => t.classList.remove("active"));
-    // Add active class to clicked trigger
-    trigger.classList.add("active");
-
-    // Get target tab ID
-    const targetId = trigger.getAttribute("data-tab");
-
-    // Hide all panes
-    tabPanes.forEach((pane) => {
-      pane.classList.remove("active");
+  if (imgWrapper && backdrop) {
+    imgWrapper.addEventListener("mouseenter", () => {
+      gsap.to(backdrop, {
+        top: 30,
+        left: 30,
+        duration: 0.3,
+        ease: "power2.out",
+      });
     });
 
-    // Show target pane
-    const targetPane = document.getElementById(targetId);
-    targetPane.classList.add("active");
+    imgWrapper.addEventListener("mouseleave", () => {
+      gsap.to(backdrop, {
+        top: 20,
+        left: 20,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    });
+  }
 
-    // Optional: Re-trigger GSAP animation for the newly shown accordion items
+  // Shared heading reveals for each chapter block.
+  [
+    ".origin-section",
+    ".journey-section",
+    ".timeline-section",
+    ".highlights-section",
+    ".gallery-section",
+    ".graduation-section",
+    ".next-chapter-section",
+  ].forEach(animateHeadingRow);
+
+  // Chapter 02: redesigned Why UJ storyboard reveal.
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: ".origin-section",
+        start: "top 82%",
+        toggleActions: "play none none reverse",
+      },
+    })
+    .fromTo(
+      ".origin-intro-card",
+      { opacity: 0, x: -45 },
+      { opacity: 1, x: 0, duration: 1, ease: "power3.out" },
+    )
+    .fromTo(
+      ".origin-main-visual",
+      { opacity: 0, y: 30, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: "power3.out" },
+      "-=0.55",
+    )
+    .fromTo(
+      ".origin-mini-card",
+      { opacity: 0, y: 40, rotate: (idx) => (idx % 2 === 0 ? -4 : 4) },
+      {
+        opacity: 1,
+        y: 0,
+        rotate: 0,
+        duration: 0.9,
+        stagger: 0.2,
+        ease: "back.out(1.25)",
+      },
+      "-=0.55",
+    )
+    .fromTo(
+      ".origin-quote-card",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.85, ease: "power2.out" },
+      "-=0.35",
+    );
+
+  // Chapter 03: main journey reveal + photo strip cascade.
+  const journeyTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".journey-section",
+      start: "top 74%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  journeyTl
+    .fromTo(
+      ".journey-image-tall",
+      { opacity: 0, clipPath: "inset(100% 0 0 0)" },
+      {
+        opacity: 1,
+        clipPath: "inset(0% 0 0 0)",
+        duration: 1.35,
+        ease: "power4.out",
+      },
+    )
+    .fromTo(
+      ".journey-content .section-paragraph",
+      { opacity: 0, x: 40 },
+      { opacity: 1, x: 0, duration: 0.95, stagger: 0.2, ease: "power3.out" },
+      "-=0.82",
+    )
+    .fromTo(
+      ".journey-image-small",
+      { opacity: 0, scale: 0.84, rotation: 4 },
+      {
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        duration: 0.95,
+        ease: "back.out(1.4)",
+      },
+      "-=0.45",
+    )
+    .fromTo(
+      ".journey-photo-strip img",
+      { opacity: 0, y: 28, scale: 0.9 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.18 },
+      "-=0.35",
+    );
+
+  const smallImage = document.querySelector(".journey-image-small");
+  if (smallImage) {
+    smallImage.addEventListener("mouseenter", () => {
+      gsap.to(smallImage, { rotation: -3, scale: 1.02, duration: 0.3 });
+    });
+
+    smallImage.addEventListener("mouseleave", () => {
+      gsap.to(smallImage, { rotation: 0, scale: 1, duration: 0.3 });
+    });
+  }
+
+  // Chapter 04: timeline cards reveal in sequence.
+  const timelineCards = gsap.utils.toArray(".timeline-card");
+  timelineCards.forEach((card, idx) => {
     gsap.fromTo(
-      targetPane.querySelectorAll(".accordion-item"),
-      { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, stagger: 0.1, duration: 0.4, ease: "power2.out" },
+      card,
+      {
+        opacity: 0,
+        y: 40,
+        x: idx % 2 === 0 ? -15 : 15,
+        rotate: idx % 2 === 0 ? -1.2 : 1.2,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        x: 0,
+        rotate: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 82%",
+          toggleActions: "play none none reverse",
+        },
+      },
     );
   });
-});
 
-// 3. Accordion Logic (Updated to handle items across all tabs)
-const allAccordionHeaders = document.querySelectorAll(".accordion-header");
+  // Chapter 05: turning point uses stronger contrast in movement.
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: ".turning-section",
+        start: "top 78%",
+        toggleActions: "play none none reverse",
+      },
+    })
+    .fromTo(
+      ".turning-copy > *",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.88, stagger: 0.18 },
+    )
+    .fromTo(
+      ".turning-photo-stack img",
+      { opacity: 0, scale: 0.86, rotate: (i) => (i === 0 ? -7 : 7) },
+      {
+        opacity: 1,
+        scale: 1,
+        rotate: (i) => (i === 0 ? -2 : 2),
+        duration: 1,
+        stagger: 0.2,
+        ease: "back.out(1.2)",
+      },
+      "-=0.35",
+    )
+    .fromTo(
+      ".turning-note",
+      { opacity: 0, y: 15 },
+      { opacity: 1, y: 0, duration: 0.7 },
+      "-=0.2",
+    );
 
-allAccordionHeaders.forEach((header) => {
-  header.addEventListener("click", function () {
-    const item = this.parentElement;
-    const content = item.querySelector(".accordion-content");
-    const inner = item.querySelector(".accordion-inner");
-    const isOpen = item.classList.contains("is-open");
-    const currentTab = item.closest(".tab-pane"); // Get the tab pane this item belongs to
+  // Chapter 06: highlights panel reveal.
+  const highlightsTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".highlights-section",
+      start: "top 75%",
+      toggleActions: "play none none reverse",
+    },
+  });
 
-    // Close other accordions *only within the same tab pane*
-    currentTab.querySelectorAll(".accordion-item").forEach((otherItem) => {
-      if (otherItem !== item && otherItem.classList.contains("is-open")) {
-        otherItem.classList.remove("is-open");
-        const otherContent = otherItem.querySelector(".accordion-content");
-        gsap.to(otherContent, {
-          height: 0,
+  highlightsTl
+    .fromTo(
+      ".sidebar-item",
+      { opacity: 0, x: -20 },
+      { opacity: 1, x: 0, stagger: 0.1, duration: 0.62 },
+    )
+    .fromTo(
+      ".vertical-divider",
+      { scaleY: 0, transformOrigin: "top center" },
+      { scaleY: 1, duration: 0.78 },
+      "-=0.3",
+    )
+    .fromTo(
+      ".tab-pane.active .accordion-item",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, stagger: 0.12, duration: 0.62 },
+      "-=0.4",
+    );
+
+  // Chapter 07: gallery pop-in and subtle parallax.
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: ".gallery-section",
+        start: "top 76%",
+        toggleActions: "play none none reverse",
+      },
+    })
+    .fromTo(
+      ".grid-item",
+      { opacity: 0, scale: 0.86, y: 34 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.92,
+        stagger: 0.16,
+        ease: "back.out(1.15)",
+      },
+    );
+
+  gsap.utils.toArray(".grid-item img").forEach((img) => {
+    gsap.to(img, {
+      yPercent: -10,
+      ease: "none",
+      scrollTrigger: {
+        trigger: img,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  });
+
+  // Chapter 08: cinematic graduation reveal.
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: ".graduation-section",
+        start: "top 75%",
+        toggleActions: "play none none reverse",
+      },
+    })
+    .fromTo(
+      ".graduation-hero-photo img",
+      { opacity: 0, scale: 1.08, filter: "saturate(0.7)" },
+      {
+        opacity: 1,
+        scale: 1,
+        filter: "saturate(1)",
+        duration: 1.3,
+        ease: "power3.out",
+      },
+    )
+    .fromTo(
+      ".graduation-copy > p",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, stagger: 0.2, duration: 0.92 },
+      "-=0.55",
+    )
+    .fromTo(
+      ".graduation-mini-grid img",
+      { opacity: 0, x: 22 },
+      { opacity: 1, x: 0, stagger: 0.18, duration: 0.82 },
+      "-=0.35",
+    );
+
+  // Close chapter reveal.
+  gsap.fromTo(
+    ".next-chapter-layout > *",
+    { opacity: 0, y: 18 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.95,
+      stagger: 0.26,
+      scrollTrigger: {
+        trigger: ".next-chapter-section",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    },
+  );
+
+  // Tabs: switch visible pane with entry animation.
+  const tabTriggers = document.querySelectorAll(".sidebar-item");
+  const tabPanes = document.querySelectorAll(".tab-pane");
+
+  tabTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      tabTriggers.forEach((t) => t.classList.remove("active"));
+      trigger.classList.add("active");
+
+      const targetId = trigger.getAttribute("data-tab");
+
+      tabPanes.forEach((pane) => pane.classList.remove("active"));
+
+      const targetPane = document.getElementById(targetId);
+      if (!targetPane) return;
+
+      targetPane.classList.add("active");
+
+      gsap.fromTo(
+        targetPane.querySelectorAll(".accordion-item"),
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, stagger: 0.1, duration: 0.4, ease: "power2.out" },
+      );
+    });
+  });
+
+  // Accordion: one-open-at-a-time behavior scoped by tab pane.
+  const allAccordionHeaders = document.querySelectorAll(".accordion-header");
+
+  allAccordionHeaders.forEach((header) => {
+    header.addEventListener("click", function () {
+      const item = this.parentElement;
+      const content = item.querySelector(".accordion-content");
+      const inner = item.querySelector(".accordion-inner");
+      const isOpen = item.classList.contains("is-open");
+      const currentTab = item.closest(".tab-pane");
+
+      if (!content || !inner || !currentTab) return;
+
+      currentTab.querySelectorAll(".accordion-item").forEach((otherItem) => {
+        if (otherItem !== item && otherItem.classList.contains("is-open")) {
+          otherItem.classList.remove("is-open");
+          const otherContent = otherItem.querySelector(".accordion-content");
+          if (otherContent) {
+            gsap.to(otherContent, {
+              height: 0,
+              duration: 0.4,
+              ease: "power2.inOut",
+            });
+          }
+        }
+      });
+
+      if (!isOpen) {
+        item.classList.add("is-open");
+        gsap.to(content, {
+          height: inner.offsetHeight,
           duration: 0.4,
           ease: "power2.inOut",
         });
+      } else {
+        item.classList.remove("is-open");
+        gsap.to(content, { height: 0, duration: 0.4, ease: "power2.inOut" });
       }
     });
-
-    // Toggle current accordion
-    if (!isOpen) {
-      item.classList.add("is-open");
-      const targetHeight = inner.offsetHeight;
-      gsap.to(content, {
-        height: targetHeight,
-        duration: 0.4,
-        ease: "power2.inOut",
-      });
-    } else {
-      item.classList.remove("is-open");
-      gsap.to(content, { height: 0, duration: 0.4, ease: "power2.inOut" });
-    }
   });
 });
