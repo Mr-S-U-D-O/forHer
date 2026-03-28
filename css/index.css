@@ -1,0 +1,154 @@
+/* 
+=========================|
+    LAYOUT & CONTAINER   |
+=========================|
+*/
+
+body {
+    /* Adding some padding so the page container doesn't touch the screen edges */
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.page-container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: transparent; /* Lets the body bg show through */
+    border: var(--border);
+    padding: 0 4rem 4rem 4rem;
+    position: relative;
+}
+
+/* 
+=========================|
+    NAVIGATION           |
+=========================|
+*/
+
+.site-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+/* Creating the bracket line above the nav from the sketch */
+.nav-bracket {
+    border-bottom: var(--border);
+    border-left: var(--border);
+    border-right: var(--border);
+    padding: 1rem 2rem;
+    margin-top: -2px; /* Pull it up to overlap the main container top border */
+    background: var(--bg-color);
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-pill {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px; /* Slightly blocky to match sketch */
+    border: 2px solid transparent;
+    transition: all var(--transition-speed) ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-pill:hover, 
+.nav-pill.active {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
+/* 
+=========================|
+    HERO SECTION         |
+=========================|
+*/
+
+.hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.hero-date {
+    font-family: var(--font-heading);
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.hero-desc {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* The offset border/backdrop from your sketch */
+.hero-image-backdrop {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100%;
+    height: 100%;
+    border: var(--border);
+    border-radius: var(--radius);
+    z-index: 1;
+}
+
+.hero-image {
+    position: relative;
+    z-index: 2;
+    border-radius: var(--radius);
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border: var(--border);
+    background-color: var(--secondary-color); /* Fallback color */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .page-container {
+        padding: 0 1.5rem 2rem 1.5rem;
+    }
+    .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hero-image-backdrop {
+        top: 10px;
+        left: 10px;
+    }
+}

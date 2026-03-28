@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-ZA">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <title>Page Title | Sudo Reset</title>
-    <meta name="description" content="Enter description here">
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="Enter description here" />
+    <meta name="robots" content="index, follow" />
 
     <!-- Browser Theme Color (Matches your Dark Charcoal) -->
-    <meta name="theme-color" content="#1a1b1e">
+    <meta name="theme-color" content="#1a1b1e" />
 
     <!-- Social Meta (Commented out - Un-comment when ready) -->
     <!-- <meta property="og:title" content="Page Title"> -->
@@ -20,29 +20,60 @@
     <!-- <meta name="twitter:card" content="summary_large_image"> -->
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/index.css">
-
-</head>
-<body>
-
-    <header class="header-container">
-        <nav class="nav-container">
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <!-- Added your graph-paper background class to the body -->
+    <body class="container-cursor-1">
+    
+        <main class="page-container">
             
-        </nav>
-    </header>
-
-    <main class="main-container">
-        <h1>this is the heading font</h1>
-        <p>this should be the para font</p>
-    </main>
-
-    <footer class="footer-container">
-      
-    </footer>
-
-    <!-- Scripts -->
+            <!-- UPDATED NAVIGATION -->
+            <header class="site-header">
+                <div class="nav-bracket">
+                    <nav class="main-nav">
+                        <!-- The line that connects the tabs -->
+                        <div class="nav-line"></div> 
+                        <ul>
+                            <!-- Added cursor hover classes and data attributes -->
+                            <li><a href="#me" class="nav-pill active cursor-hover-item" data-cursor-text=" ME " data-cursor-text-repeat="5">Me</a></li>
+                            <li><a href="#family" class="nav-pill cursor-hover-item" data-cursor-text=" FAMILY " data-cursor-text-repeat="3">My family</a></li>
+                            <li><a href="#bff" class="nav-pill cursor-hover-item" data-cursor-text=" BFF " data-cursor-text-repeat="4">My BFF</a></li>
+                            <li><a href="#him" class="nav-pill cursor-hover-item" data-cursor-text=" HIM " data-cursor-text-repeat="4">HIM</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+    
+            <!-- HERO SECTION -->
+            <section class="hero-section" id="me">
+                <div class="hero-content">
+                    <h1 class="hero-title">I actually did it.</h1>
+                    <p class="hero-date">Class of 2026</p>
+                    <p class="hero-desc">Four years of caffeine, late-night cram sessions, and making memories. Welcome to my little corner of the internet where I dump all my favorite moments from graduation. Spoiler: I cried a lot.</p>
+                </div>
+                
+                <!-- Added cursor hover class to the image wrapper -->
+                <div class="hero-image-wrapper cursor-hover-item" data-cursor-text=" CHLOE " data-cursor-text-repeat="4">
+                    <div class="hero-image-backdrop"></div>
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Chloe smiling at graduation" class="hero-image">
+                </div>
+            </section>
+        </main>
+    
+        <!-- THE CUSTOM CURSOR ELEMENTS -->
+        <div class="cursor cursor--small"></div>
+        <div class="cursor cursor--large"></div>
+        <div class="cursor cursor--text">
+            <div class="text"></div>
+        </div>
+    
+        <!-- Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <!-- Added CircleType dependency for your cursor script -->
+        <script src="https://cdn.jsdelivr.net/npm/circletype@2.3.0/dist/circletype.min.js"></script>
     <script src="javascript/global.js" defer></script>
     <script src="javascript/index.js" defer></script>
-</body>
+  </body>
 </html>
