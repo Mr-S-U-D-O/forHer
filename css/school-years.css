@@ -49,7 +49,7 @@
   font-size: 0.85rem;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   margin-bottom: 1rem;
   font-weight: 500;
 }
@@ -62,13 +62,13 @@
   letter-spacing: -1.2px;
   margin-bottom: 1rem;
   line-height: 1.1;
-  color: var(--color-primary);
+  color: var(--primary-color);
 }
 
 .school-hero-subtitle {
   font-size: 1.2rem;
   font-weight: 500;
-  color: var(--color-primary);
+  color: var(--primary-color);
   margin-bottom: 1.5rem;
   line-height: 1.4;
 }
@@ -77,7 +77,7 @@
   font-family: var(--font-main);
   font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
   max-width: 550px;
 }
 
@@ -94,7 +94,7 @@
   font-size: 0.75rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   background: rgba(219, 193, 230, 0.3);
   font-weight: 600;
 }
@@ -104,7 +104,11 @@
 
 .school-primary-section {
   padding: 5rem 4rem;
-  background: linear-gradient(180deg, transparent 0%, rgba(163, 42, 214, 0.03) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(163, 42, 214, 0.03) 100%
+  );
 }
 
 .primary-split-layout {
@@ -127,7 +131,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.5px;
-  color: var(--color-primary);
+  color: var(--primary-color);
   line-height: 1.2;
 }
 
@@ -139,7 +143,7 @@
 
 .timeline-dot {
   padding: 1.5rem;
-  border-left: 4px solid var(--color-secondary);
+  border-left: 4px solid var(--secondary-color);
   padding-left: 2rem;
   position: relative;
 }
@@ -152,8 +156,8 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--color-secondary);
-  border: 3px solid var(--color-bg);
+  background: var(--secondary-color);
+  border: 3px solid var(--bg-color);
 }
 
 .dot-label {
@@ -161,7 +165,7 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   font-weight: 600;
   margin-bottom: 0.3rem;
 }
@@ -169,7 +173,7 @@
 .dot-text {
   font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
 }
 
 /* Primary photo grid: hero + pair */
@@ -199,7 +203,11 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(50, 12, 64, 0.9) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(50, 12, 64, 0.9) 100%
+  );
   padding: 2rem 1rem 1rem;
   font-size: 0.85rem;
   color: #fff;
@@ -251,7 +259,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   margin-bottom: 1.5rem;
 }
 
@@ -273,13 +281,13 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
 }
 
 .insight-text {
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
 }
 
 /* ─────────────────────────────────────────────────────────────────── */
@@ -287,7 +295,11 @@
 
 .school-secondary-section {
   padding: 5rem 4rem;
-  background: linear-gradient(180deg, rgba(219, 193, 230, 0.15) 0%, transparent 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(219, 193, 230, 0.15) 0%,
+    transparent 100%
+  );
 }
 
 .secondary-intro-block {
@@ -301,7 +313,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.5px;
-  color: var(--color-primary);
+  color: var(--primary-color);
   margin-bottom: 1.5rem;
   line-height: 1.2;
 }
@@ -309,7 +321,7 @@
 .secondary-intro-block p {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
 }
 
 /* Grade progression: vertical stacked cards */
@@ -341,7 +353,11 @@
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, var(--color-secondary) 0%, transparent 80%);
+  background: linear-gradient(
+    90deg,
+    var(--secondary-color) 0%,
+    transparent 80%
+  );
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -354,7 +370,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border-right: 2px solid var(--color-secondary);
+  border-right: 2px solid var(--secondary-color);
   padding-right: 2rem;
   text-align: left;
 }
@@ -363,7 +379,7 @@
   font-family: var(--font-heading);
   font-size: 1.6rem;
   font-weight: 900;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   line-height: 1;
   letter-spacing: -1px;
 }
@@ -372,7 +388,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   opacity: 0.8;
 }
 
@@ -388,13 +404,13 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: var(--color-primary);
+  color: var(--primary-color);
 }
 
 .grade-content p {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
 }
 
 .grade-photo {
@@ -419,10 +435,10 @@
 .grade-key-moment {
   font-size: 0.8rem;
   font-style: italic;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   padding: 0.8rem 1rem;
   background: rgba(163, 42, 214, 0.08);
-  border-left: 3px solid var(--color-secondary);
+  border-left: 3px solid var(--secondary-color);
   padding-left: 1rem;
 }
 
@@ -435,7 +451,7 @@
 
   .grade-header {
     border-right: none;
-    border-bottom: 2px solid var(--color-secondary);
+    border-bottom: 2px solid var(--secondary-color);
     padding-right: 0;
     padding-bottom: 1rem;
     flex-direction: row;
@@ -461,7 +477,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.5px;
-  color: var(--color-primary);
+  color: var(--primary-color);
   margin-bottom: 3rem;
   text-align: center;
 }
@@ -541,7 +557,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.3px;
-  color: var(--color-primary);
+  color: var(--primary-color);
   margin-bottom: 0.5rem;
   line-height: 1.2;
 }
@@ -550,7 +566,7 @@
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -558,7 +574,7 @@
 .friend-content-side p {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
   margin-bottom: 1rem;
 }
 
@@ -566,9 +582,9 @@
   font-size: 0.85rem;
   padding: 1rem;
   background: rgba(163, 42, 214, 0.08);
-  border-left: 3px solid var(--color-secondary);
+  border-left: 3px solid var(--secondary-color);
   font-style: italic;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
 }
 
 @media (max-width: 1024px) {
@@ -602,7 +618,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.5px;
-  color: var(--color-primary);
+  color: var(--primary-color);
   margin-bottom: 3rem;
   text-align: center;
 }
@@ -662,7 +678,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: var(--color-primary);
+  color: var(--primary-color);
 }
 
 .achievement-detail {
@@ -676,14 +692,14 @@
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   font-weight: 600;
 }
 
 .achievement-detail p:last-child {
   font-size: 0.85rem;
   line-height: 1.5;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
 }
 
 /* ─────────────────────────────────────────────────────────────────── */
@@ -706,7 +722,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.4px;
-  color: var(--color-primary);
+  color: var(--primary-color);
   margin-bottom: 1.5rem;
   line-height: 1.2;
 }
@@ -714,7 +730,7 @@
 .ambition-shift-column p {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
   margin-bottom: 1rem;
 }
 
@@ -747,7 +763,11 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(50, 12, 64, 0.95) 60%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(50, 12, 64, 0.95) 60%
+  );
   color: #fff;
   padding: 1.5rem;
   font-size: 0.85rem;
@@ -766,7 +786,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   margin-bottom: 1.5rem;
   display: block;
 }
@@ -783,7 +803,7 @@
 .values-list li {
   font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
   padding-left: 1.5rem;
   position: relative;
 }
@@ -792,7 +812,7 @@
   content: "→";
   position: absolute;
   left: 0;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   font-weight: 700;
 }
 
@@ -826,7 +846,7 @@
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.6;
-  color: var(--color-primary);
+  color: var(--primary-color);
   font-style: italic;
   position: relative;
   padding: 2rem;
@@ -835,7 +855,7 @@
 .reflection-quote::before {
   content: "";
   font-size: 3rem;
-  color: var(--color-secondary);
+  color: var(--secondary-color);
   opacity: 0.3;
   position: absolute;
   top: -10px;
@@ -851,7 +871,7 @@
 .reflection-final-words p {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
   margin-bottom: 1.5rem;
 }
 
@@ -870,7 +890,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.3px;
-  color: var(--color-primary);
+  color: var(--primary-color);
   margin-bottom: 2rem;
 }
 
@@ -884,7 +904,7 @@
 .nav-cta-button {
   padding: 1rem 2.5rem;
   border: var(--border);
-  background: var(--color-secondary);
+  background: var(--secondary-color);
   color: #fff;
   font-size: 0.85rem;
   font-weight: 600;
@@ -900,15 +920,15 @@
 .nav-cta-button:hover {
   transform: translate(-4px, -4px);
   box-shadow: 8px 8px 0 rgba(50, 12, 64, 0.2);
-  background: var(--color-primary);
+  background: var(--primary-color);
 }
 
 .nav-back {
-  background: var(--color-primary);
+  background: var(--primary-color);
 }
 
 .nav-back:hover {
-  background: var(--color-secondary);
+  background: var(--secondary-color);
 }
 
 /* ─────────────────────────────────────────────────────────────────── */

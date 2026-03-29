@@ -1,7 +1,7 @@
 # Website Expansion Plan (Living Document)
 
 Last updated: 2026-03-29
-Status: Planning in progress
+Status: Phase 1 complete, Phase 2 ready for execution
 Owner: Client project (forHer)
 
 ## Purpose
@@ -157,7 +157,7 @@ Status after this pass:
 
 ### Core pages (top-level)
 
-- [~] Me page (hub content significantly improved; further polish and optional real inner-page linking pending)
+- [x] Me page (hub + 4 inner pages complete and linked in narrative flow)
 - [ ] My Parents gateway page
 - [ ] My Sister page
 - [ ] My Cousins gateway page
@@ -317,3 +317,35 @@ Each page has completely unique layout structure, CSS patterns, and animation ap
 ## Status
 
 All Me-page architecture and inner pages complete and functional. Ready for phase 2: photo population and family system expansion.
+
+## Immediate Implementation Queue (Phase 2)
+
+1. Navigation pass across all pages
+
+- Replace legacy labels with final labels: Me, My Parents, My Sister, My Cousins, My Aunts and Uncles, My Friends, Him.
+- Ensure nav active states and button opacity are consistent with index design system.
+
+2. Photo population pass
+
+- Fill image slots for index + all four inner Me pages.
+- Validate image crops, file sizes, and mobile rendering.
+
+3. Family vertical slice
+
+- Build My Parents gateway page.
+- Build Father and Mother detail pages with constrained discoverability from My Parents only.
+
+4. Data model kickoff
+
+- Create initial JSON schemas for cousins, aunts/uncles, and friends.
+- Seed with first batch records so card rendering can be tested.
+
+5. Protected page setup
+
+- Implement front-end password gate for Him page with clear UX and limitations documented.
+
+## Readiness Notes
+
+- Inner-page continuity is now enabled from School Years to UJ Deep Dive (removed the previous Coming Soon blocker).
+- Color token mismatches were corrected in new page stylesheets so shared nav styling behavior matches index.
+- No architecture blockers remain for starting family-system implementation.
