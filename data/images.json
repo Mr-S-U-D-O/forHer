@@ -1,0 +1,345 @@
+{
+  "version": 1,
+  "provider": "cloudinary",
+  "notes": {
+    "howToUse": "Each image needs id, source, alt, and target. Replace source to swap an image without editing HTML or JS.",
+    "build": "Run: node javascript/build-images.js",
+    "replaceFlow": "1) change source in this file, 2) run build script, 3) refresh browser"
+  },
+  "slotGuide": {
+    "hero": ".hero-image",
+    "originMain": ".origin-main-visual img",
+    "originMini1": ".origin-side-visuals .origin-mini-card:nth-child(1) img",
+    "originMini2": ".origin-side-visuals .origin-mini-card:nth-child(2) img",
+    "journeyTall": ".journey-image-tall",
+    "journeySmall": ".journey-image-small",
+    "journeyStrip1": ".journey-photo-strip img:nth-child(1)",
+    "journeyStrip2": ".journey-photo-strip img:nth-child(2)",
+    "journeyStrip3": ".journey-photo-strip img:nth-child(3)",
+    "timeline1": ".timeline-track .timeline-card:nth-child(1) img",
+    "timeline2": ".timeline-track .timeline-card:nth-child(2) img",
+    "timeline3": ".timeline-track .timeline-card:nth-child(3) img",
+    "timeline4": ".timeline-track .timeline-card:nth-child(4) img",
+    "timeline5Main": ".timeline-card-wide .timeline-card-wide-main img",
+    "timeline5Side": ".timeline-card-wide .timeline-card-wide-side img",
+    "turning1": ".turning-photo-stack img:nth-child(1)",
+    "turning2": ".turning-photo-stack img:nth-child(2)",
+    "cameraSquare": ".grid-img-square img",
+    "cameraWide": ".grid-img-wide img",
+    "cameraTall": ".grid-img-tall img",
+    "graduationHero": ".graduation-hero-photo img",
+    "graduationMini1": ".graduation-mini-grid img:nth-child(1)",
+    "graduationMini2": ".graduation-mini-grid img:nth-child(2)",
+    "nextChapter": ".next-chapter-photo img"
+  },
+  "collections": {
+    "hero": [
+      {
+        "id": "hero-main",
+        "source": "design assets/currentColor/image.png",
+        "alt": "UJ student portrait in graduation attire",
+        "target": ".hero-image",
+        "placement": "Chapter 01 hero portrait"
+      }
+    ],
+    "origin": [
+      {
+        "id": "origin-main-visual",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Students at a large university campus similar to UJ",
+        "target": ".origin-main-visual img",
+        "placement": "Chapter 02 main campus visual"
+      },
+      {
+        "id": "origin-mini-01",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Student focused on laptop work",
+        "target": ".origin-side-visuals .origin-mini-card:nth-child(1) img",
+        "placement": "Chapter 02 mini card 1"
+      },
+      {
+        "id": "origin-mini-02",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Notebook with handwritten goals",
+        "target": ".origin-side-visuals .origin-mini-card:nth-child(2) img",
+        "placement": "Chapter 02 mini card 2"
+      }
+    ],
+    "journey": [
+      {
+        "id": "journey-tall",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Late-night study desk during university exam prep",
+        "target": ".journey-image-tall",
+        "placement": "Chapter 03 tall image"
+      },
+      {
+        "id": "journey-small",
+        "source": "design assets/currentColor/image.png",
+        "alt": "UJ classmates supporting each other during studies",
+        "target": ".journey-image-small",
+        "placement": "Chapter 03 small image"
+      },
+      {
+        "id": "journey-strip-01",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Weekly study planning notes",
+        "target": ".journey-photo-strip img:nth-child(1)",
+        "placement": "Chapter 03 photo strip image 1"
+      },
+      {
+        "id": "journey-strip-02",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Students walking together on campus",
+        "target": ".journey-photo-strip img:nth-child(2)",
+        "placement": "Chapter 03 photo strip image 2"
+      },
+      {
+        "id": "journey-strip-03",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Student focused in a quiet library",
+        "target": ".journey-photo-strip img:nth-child(3)",
+        "placement": "Chapter 03 photo strip image 3"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "timeline-year-01",
+        "source": "design assets/index.html/image.png",
+        "alt": "First-year students learning foundational science concepts",
+        "target": ".timeline-track .timeline-card:nth-child(1) img",
+        "placement": "Chapter 04 year 1 card"
+      },
+      {
+        "id": "timeline-year-02",
+        "source": "design assets/index.html/image copy.png",
+        "alt": "Students working together in a food science lab",
+        "target": ".timeline-track .timeline-card:nth-child(2) img",
+        "placement": "Chapter 04 year 2 card"
+      },
+      {
+        "id": "timeline-year-03",
+        "source": "design assets/index.html/image copy 2.png",
+        "alt": "Detailed planning for project-heavy semester",
+        "target": ".timeline-track .timeline-card:nth-child(3) img",
+        "placement": "Chapter 04 year 3 card"
+      },
+      {
+        "id": "timeline-year-04",
+        "source": "design assets/index.html/image copy 3.png",
+        "alt": "Student completing diploma requirements and preparing for graduation",
+        "target": ".timeline-track .timeline-card:nth-child(4) img",
+        "placement": "Chapter 04 year 4 card"
+      },
+      {
+        "id": "timeline-year-05-main",
+        "source": "design assets/index.html/theHero.png",
+        "alt": "Advanced food technology lab and process work",
+        "target": ".timeline-card-wide .timeline-card-wide-main img",
+        "placement": "Chapter 04 year 5 main image"
+      },
+      {
+        "id": "timeline-year-05-side",
+        "source": "design assets/index.html/theNav.png",
+        "alt": "Advanced diploma year specialization in food technology",
+        "target": ".timeline-card-wide .timeline-card-wide-side img",
+        "placement": "Chapter 04 year 5 side image"
+      }
+    ],
+    "turningPoint": [
+      {
+        "id": "turning-stack-01",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Laptop and planner during a difficult semester",
+        "target": ".turning-photo-stack img:nth-child(1)",
+        "placement": "Chapter 05 stack image 1"
+      },
+      {
+        "id": "turning-stack-02",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Checklist and notes used for study recovery",
+        "target": ".turning-photo-stack img:nth-child(2)",
+        "placement": "Chapter 05 stack image 2"
+      }
+    ],
+    "cameraRollSquare": [
+      {
+        "id": "camera-square-01",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Graduation cap toss celebration",
+        "target": ".grid-img-square img",
+        "placement": "Chapter 07 square tile"
+      },
+      {
+        "id": "camera-square-02",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Students celebrating after exams",
+        "target": ".grid-img-square img",
+        "placement": "Camera roll square rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-square-03",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Notebook and coffee during study session",
+        "target": ".grid-img-square img",
+        "placement": "Camera roll square rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-square-04",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Books stacked on a campus table",
+        "target": ".grid-img-square img",
+        "placement": "Camera roll square rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-square-05",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Student writing notes before class",
+        "target": ".grid-img-square img",
+        "placement": "Camera roll square rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-square-06",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Friends smiling together on campus",
+        "target": ".grid-img-square img",
+        "placement": "Camera roll square rotation",
+        "runtimeOnly": true
+      }
+    ],
+    "cameraRollWide": [
+      {
+        "id": "camera-wide-01",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Classmates celebrating together after finals",
+        "target": ".grid-img-wide img",
+        "placement": "Chapter 07 wide tile"
+      },
+      {
+        "id": "camera-wide-02",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Group discussing ideas at a long table",
+        "target": ".grid-img-wide img",
+        "placement": "Camera roll wide rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-wide-03",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Graduates celebrating at ceremony grounds",
+        "target": ".grid-img-wide img",
+        "placement": "Camera roll wide rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-wide-04",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Team project collaboration in class",
+        "target": ".grid-img-wide img",
+        "placement": "Camera roll wide rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-wide-05",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Study group working late on laptops",
+        "target": ".grid-img-wide img",
+        "placement": "Camera roll wide rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-wide-06",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Friends hugging after a shared milestone",
+        "target": ".grid-img-wide img",
+        "placement": "Camera roll wide rotation",
+        "runtimeOnly": true
+      }
+    ],
+    "cameraRollTall": [
+      {
+        "id": "camera-tall-01",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Portrait style shot of a student at campus",
+        "target": ".grid-img-tall img",
+        "placement": "Chapter 07 tall tile"
+      },
+      {
+        "id": "camera-tall-02",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Portrait of a graduate with family",
+        "target": ".grid-img-tall img",
+        "placement": "Camera roll tall rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-tall-03",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Student walking through a campus corridor",
+        "target": ".grid-img-tall img",
+        "placement": "Camera roll tall rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-tall-04",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Focused portrait while studying",
+        "target": ".grid-img-tall img",
+        "placement": "Camera roll tall rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-tall-05",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Graduate portrait with cap and gown",
+        "target": ".grid-img-tall img",
+        "placement": "Camera roll tall rotation",
+        "runtimeOnly": true
+      },
+      {
+        "id": "camera-tall-06",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Student reading near campus library shelves",
+        "target": ".grid-img-tall img",
+        "placement": "Camera roll tall rotation",
+        "runtimeOnly": true
+      }
+    ],
+    "graduation": [
+      {
+        "id": "graduation-hero",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Graduate smiling confidently on ceremony day",
+        "target": ".graduation-hero-photo img",
+        "placement": "Chapter 08 hero image"
+      },
+      {
+        "id": "graduation-mini-01",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Close friends hugging after graduation",
+        "target": ".graduation-mini-grid img:nth-child(1)",
+        "placement": "Chapter 08 mini grid image 1"
+      },
+      {
+        "id": "graduation-mini-02",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Family and graduate sharing a proud moment",
+        "target": ".graduation-mini-grid img:nth-child(2)",
+        "placement": "Chapter 08 mini grid image 2"
+      }
+    ],
+    "nextChapter": [
+      {
+        "id": "next-chapter-photo",
+        "source": "design assets/currentColor/image.png",
+        "alt": "Student walking across campus toward the next chapter",
+        "target": ".next-chapter-photo img",
+        "placement": "Final chapter image"
+      }
+    ]
+  }
+}

@@ -29,11 +29,61 @@ const animateHeadingRow = (selector) => {
     );
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const navBracket = document.querySelector(".nav-bracket");
   const navToggle = document.querySelector(".nav-toggle");
   const mainNav = document.getElementById("primary-nav");
   const navLinks = document.querySelectorAll(".main-nav .nav-pill");
+  let imageManifest = null;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const saveDataMode = navigator.connection?.saveData === true;
+  const shouldLimitMotion = prefersReducedMotion || saveDataMode;
+
+  // Apply data/images.manifest.json so image sources are managed from one file.
+  const applyImageManifest = async () => {
+    try {
+      const response = await fetch("data/images.manifest.json", {
+        cache: "no-store",
+      });
+
+      if (!response.ok) return;
+
+      imageManifest = await response.json();
+      const collections = Object.values(imageManifest.collections || {});
+      const firstImageByTarget = new Map();
+
+      collections.forEach((images) => {
+        if (!Array.isArray(images)) return;
+
+        images.forEach((image) => {
+          if (!image?.target || !image?.url) return;
+          if (!firstImageByTarget.has(image.target)) {
+            firstImageByTarget.set(image.target, image);
+          }
+        });
+      });
+
+      firstImageByTarget.forEach((image, target) => {
+        const element = document.querySelector(target);
+        if (!element) return;
+
+        element.src = image.url;
+        if (image.alt) {
+          element.alt = image.alt;
+        }
+
+        if (image.id) {
+          element.dataset.imageId = image.id;
+        }
+      });
+    } catch (error) {
+      // Keep inline image fallbacks when manifest is missing or unavailable.
+    }
+  };
+
+  await applyImageManifest();
 
   // Mobile navigation interactions.
   if (navBracket && navToggle && mainNav) {
@@ -370,18 +420,173 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     );
 
-  gsap.utils.toArray(".grid-item img").forEach((img) => {
-    gsap.to(img, {
-      yPercent: -10,
-      ease: "none",
-      scrollTrigger: {
-        trigger: img,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
+  if (!shouldLimitMotion) {
+    gsap.utils.toArray(".grid-item img").forEach((img) => {
+      gsap.to(img, {
+        yPercent: -10,
+        ease: "none",
+        scrollTrigger: {
+          trigger: img,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
     });
-  });
+  }
+
+  // Keep the same grid while cycling through more photos over time.
+  const gallerySquareImg = document.querySelector(".grid-img-square img");
+  const galleryWideImg = document.querySelector(".grid-img-wide img");
+  const galleryTallImg = document.querySelector(".grid-img-tall img");
+
+  const preloadImage = (url) =>
+    new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => resolve(url);
+      image.onerror = reject;
+      image.src = url;
+    });
+
+  const shuffle = (items) => {
+    const copy = [...items];
+    for (let idx = copy.length - 1; idx > 0; idx -= 1) {
+      const swapIdx = Math.floor(Math.random() * (idx + 1));
+      [copy[idx], copy[swapIdx]] = [copy[swapIdx], copy[idx]];
+    }
+    return copy;
+  };
+
+  const buildSlotState = (element, extraPhotos) => {
+    if (!element) return null;
+
+    const fallbackPhoto = {
+      src: element.currentSrc || element.src,
+      alt: element.alt || "Gallery memory",
+    };
+
+    const uniquePool = [fallbackPhoto, ...extraPhotos].filter(
+      (photo, idx, arr) =>
+        arr.findIndex((item) => item.src === photo.src) === idx,
+    );
+
+    return {
+      element,
+      pool: uniquePool,
+      queue: shuffle(uniquePool),
+      isAnimating: false,
+    };
+  };
+
+  const getCollectionPhotos = (collectionName) => {
+    const collection = imageManifest?.collections?.[collectionName];
+    if (!Array.isArray(collection)) return [];
+
+    return collection
+      .filter((item) => item?.url)
+      .map((item) => ({
+        src: item.url,
+        alt: item.alt || "Gallery memory",
+      }));
+  };
+
+  const cameraRollSlots = [
+    buildSlotState(gallerySquareImg, getCollectionPhotos("cameraRollSquare")),
+    buildSlotState(galleryWideImg, getCollectionPhotos("cameraRollWide")),
+    buildSlotState(galleryTallImg, getCollectionPhotos("cameraRollTall")),
+  ].filter(Boolean);
+
+  const takeNextPhoto = (slotState) => {
+    const currentSrc = slotState.element.currentSrc || slotState.element.src;
+
+    if (!slotState.queue.length) {
+      slotState.queue = shuffle(
+        slotState.pool.filter((photo) => photo.src !== currentSrc),
+      );
+    }
+
+    let nextPhoto = slotState.queue.shift();
+
+    if (!nextPhoto || nextPhoto.src === currentSrc) {
+      nextPhoto = slotState.pool.find((photo) => photo.src !== currentSrc);
+    }
+
+    return nextPhoto || null;
+  };
+
+  const rotateSlot = async (slotState) => {
+    if (!slotState || slotState.isAnimating) return;
+
+    const nextPhoto = takeNextPhoto(slotState);
+    if (!nextPhoto) return;
+
+    slotState.isAnimating = true;
+
+    try {
+      await preloadImage(nextPhoto.src);
+
+      gsap.to(slotState.element, {
+        opacity: 0,
+        duration: 0.34,
+        ease: "power2.inOut",
+        onComplete: () => {
+          slotState.element.src = nextPhoto.src;
+          slotState.element.alt = nextPhoto.alt;
+
+          gsap.to(slotState.element, {
+            opacity: 1,
+            duration: 0.42,
+            ease: "power2.out",
+            onComplete: () => {
+              slotState.isAnimating = false;
+            },
+          });
+        },
+      });
+    } catch (error) {
+      slotState.isAnimating = false;
+    }
+  };
+
+  if (cameraRollSlots.length) {
+    let slotCursor = 0;
+    let rotationIntervalId = null;
+
+    const startGalleryRotation = () => {
+      const slotState = cameraRollSlots[slotCursor];
+      rotateSlot(slotState);
+      slotCursor = (slotCursor + 1) % cameraRollSlots.length;
+    };
+
+    const beginAutoRotation = () => {
+      if (rotationIntervalId !== null) return;
+      rotationIntervalId = window.setInterval(startGalleryRotation, 2500);
+    };
+
+    const stopAutoRotation = () => {
+      if (rotationIntervalId === null) return;
+      window.clearInterval(rotationIntervalId);
+      rotationIntervalId = null;
+    };
+
+    if (!shouldLimitMotion) {
+      beginAutoRotation();
+    }
+
+    const galleryContainer = document.querySelector(".gallery-grid-container");
+    if (galleryContainer) {
+      galleryContainer.addEventListener("mouseenter", stopAutoRotation);
+      galleryContainer.addEventListener("mouseleave", beginAutoRotation);
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAutoRotation();
+      } else if (!shouldLimitMotion) {
+        beginAutoRotation();
+      }
+    });
+  }
 
   // Chapter 08: cinematic graduation reveal.
   gsap
@@ -433,70 +638,251 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   );
 
-  // Tabs: switch visible pane with entry animation.
-  const tabTriggers = document.querySelectorAll(".sidebar-item");
-  const tabPanes = document.querySelectorAll(".tab-pane");
+  // Reading progress: a compact chapter tracker that does not alter layout.
+  const progressRoot = document.querySelector(".chapter-progress");
+  const progressValue = document.querySelector(".chapter-progress-value");
+  const progressTitle = document.querySelector(".chapter-progress-title");
+  const storySections = Array.from(
+    document.querySelectorAll("main section[id]"),
+  );
 
-  tabTriggers.forEach((trigger) => {
-    trigger.addEventListener("click", () => {
-      tabTriggers.forEach((t) => t.classList.remove("active"));
-      trigger.classList.add("active");
+  const getSectionTitle = (section) => {
+    const heading = section.querySelector(".section-heading");
+    if (heading) return heading.textContent.trim();
 
-      const targetId = trigger.getAttribute("data-tab");
+    const chapterTag = section.querySelector(".chapter-tag");
+    if (chapterTag) {
+      const raw = chapterTag.textContent.trim();
+      return raw.includes("·") ? raw.split("·")[1].trim() : raw;
+    }
 
-      tabPanes.forEach((pane) => pane.classList.remove("active"));
+    return section.id
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (letter) => letter.toUpperCase());
+  };
 
-      const targetPane = document.getElementById(targetId);
-      if (!targetPane) return;
+  const updateChapterProgress = (activeIndex) => {
+    if (!progressRoot || !progressValue || !progressTitle) return;
+    if (activeIndex < 0 || activeIndex >= storySections.length) return;
 
-      targetPane.classList.add("active");
+    progressValue.textContent = `${activeIndex + 1}/${storySections.length}`;
+    progressTitle.textContent = getSectionTitle(storySections[activeIndex]);
+  };
 
+  if (progressRoot && storySections.length) {
+    updateChapterProgress(0);
+
+    const progressObserver = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (!visibleEntries.length) return;
+
+        const activeSection = visibleEntries[0].target;
+        const activeIndex = storySections.indexOf(activeSection);
+        updateChapterProgress(activeIndex);
+      },
+      {
+        threshold: [0.35, 0.55, 0.75],
+        rootMargin: "-8% 0px -38% 0px",
+      },
+    );
+
+    storySections.forEach((section) => progressObserver.observe(section));
+  }
+
+  // Tabs: keyboard-friendly behavior with ARIA semantics.
+  const tabList = document.querySelector(".sidebar-list");
+  const tabTriggers = Array.from(document.querySelectorAll(".sidebar-item"));
+  const tabPanes = Array.from(document.querySelectorAll(".tab-pane"));
+
+  if (tabList) {
+    tabList.setAttribute("role", "tablist");
+    tabList.setAttribute("aria-label", "Highlights categories");
+  }
+
+  const activateTab = (trigger, shouldFocus = false) => {
+    const targetId = trigger.getAttribute("data-tab");
+    const targetPane = targetId ? document.getElementById(targetId) : null;
+    if (!targetPane) return;
+
+    tabTriggers.forEach((tab) => {
+      const isActive = tab === trigger;
+      tab.classList.toggle("active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.setAttribute("tabindex", isActive ? "0" : "-1");
+    });
+
+    tabPanes.forEach((pane) => {
+      const isActive = pane === targetPane;
+      pane.classList.toggle("active", isActive);
+      pane.hidden = !isActive;
+    });
+
+    if (shouldFocus) {
+      trigger.focus();
+    }
+
+    if (!shouldLimitMotion) {
       gsap.fromTo(
         targetPane.querySelectorAll(".accordion-item"),
         { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, stagger: 0.1, duration: 0.4, ease: "power2.out" },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 0.4,
+          ease: "power2.out",
+        },
       );
+    }
+  };
+
+  tabTriggers.forEach((trigger, index) => {
+    const targetId = trigger.getAttribute("data-tab");
+    const triggerId = trigger.id || `highlights-tab-${index + 1}`;
+    trigger.id = triggerId;
+    trigger.setAttribute("role", "tab");
+    trigger.setAttribute("aria-controls", targetId || "");
+    trigger.setAttribute(
+      "aria-selected",
+      String(trigger.classList.contains("active")),
+    );
+    trigger.setAttribute(
+      "tabindex",
+      trigger.classList.contains("active") ? "0" : "-1",
+    );
+
+    trigger.addEventListener("click", () => activateTab(trigger));
+    trigger.addEventListener("keydown", (event) => {
+      const key = event.key;
+      const currentIndex = tabTriggers.indexOf(trigger);
+      let nextIndex = currentIndex;
+
+      if (key === "ArrowRight" || key === "ArrowDown") {
+        nextIndex = (currentIndex + 1) % tabTriggers.length;
+      } else if (key === "ArrowLeft" || key === "ArrowUp") {
+        nextIndex =
+          (currentIndex - 1 + tabTriggers.length) % tabTriggers.length;
+      } else if (key === "Home") {
+        nextIndex = 0;
+      } else if (key === "End") {
+        nextIndex = tabTriggers.length - 1;
+      } else if (key === " " || key === "Enter") {
+        event.preventDefault();
+        activateTab(trigger);
+        return;
+      } else {
+        return;
+      }
+
+      event.preventDefault();
+      activateTab(tabTriggers[nextIndex], true);
     });
   });
 
-  // Accordion: one-open-at-a-time behavior scoped by tab pane.
-  const allAccordionHeaders = document.querySelectorAll(".accordion-header");
+  tabPanes.forEach((pane) => {
+    const tab = tabTriggers.find(
+      (item) => item.getAttribute("data-tab") === pane.id,
+    );
+    pane.setAttribute("role", "tabpanel");
+    pane.setAttribute("tabindex", "0");
+    pane.hidden = !pane.classList.contains("active");
+    if (tab) {
+      pane.setAttribute("aria-labelledby", tab.id);
+    }
+  });
 
-  allAccordionHeaders.forEach((header) => {
-    header.addEventListener("click", function () {
-      const item = this.parentElement;
-      const content = item.querySelector(".accordion-content");
-      const inner = item.querySelector(".accordion-inner");
-      const isOpen = item.classList.contains("is-open");
+  // Accordion: one-open-at-a-time with ARIA state sync.
+  const allAccordionItems = Array.from(
+    document.querySelectorAll(".accordion-item"),
+  );
+
+  const closeAccordionItem = (item) => {
+    const header = item.querySelector(".accordion-header");
+    const content = item.querySelector(".accordion-content");
+    if (!header || !content) return;
+
+    item.classList.remove("is-open");
+    header.setAttribute("aria-expanded", "false");
+
+    gsap.to(content, {
+      height: 0,
+      duration: shouldLimitMotion ? 0 : 0.4,
+      ease: "power2.inOut",
+      onComplete: () => {
+        content.hidden = true;
+      },
+    });
+  };
+
+  const openAccordionItem = (item) => {
+    const header = item.querySelector(".accordion-header");
+    const content = item.querySelector(".accordion-content");
+    const inner = item.querySelector(".accordion-inner");
+    if (!header || !content || !inner) return;
+
+    item.classList.add("is-open");
+    header.setAttribute("aria-expanded", "true");
+    content.hidden = false;
+
+    gsap.to(content, {
+      height: inner.offsetHeight,
+      duration: shouldLimitMotion ? 0 : 0.4,
+      ease: "power2.inOut",
+    });
+  };
+
+  allAccordionItems.forEach((item, index) => {
+    const header = item.querySelector(".accordion-header");
+    const content = item.querySelector(".accordion-content");
+    if (!header || !content) return;
+
+    const headerId = header.id || `accordion-header-${index + 1}`;
+    const panelId = content.id || `accordion-panel-${index + 1}`;
+
+    header.id = headerId;
+    content.id = panelId;
+    header.setAttribute("aria-controls", panelId);
+    header.setAttribute(
+      "aria-expanded",
+      String(item.classList.contains("is-open")),
+    );
+    content.setAttribute("role", "region");
+    content.setAttribute("aria-labelledby", headerId);
+    content.hidden = !item.classList.contains("is-open");
+  });
+
+  allAccordionItems.forEach((item) => {
+    const header = item.querySelector(".accordion-header");
+    if (!header) return;
+
+    header.addEventListener("click", () => {
       const currentTab = item.closest(".tab-pane");
+      if (!currentTab) return;
 
-      if (!content || !inner || !currentTab) return;
+      const isOpen = item.classList.contains("is-open");
 
       currentTab.querySelectorAll(".accordion-item").forEach((otherItem) => {
         if (otherItem !== item && otherItem.classList.contains("is-open")) {
-          otherItem.classList.remove("is-open");
-          const otherContent = otherItem.querySelector(".accordion-content");
-          if (otherContent) {
-            gsap.to(otherContent, {
-              height: 0,
-              duration: 0.4,
-              ease: "power2.inOut",
-            });
-          }
+          closeAccordionItem(otherItem);
         }
       });
 
-      if (!isOpen) {
-        item.classList.add("is-open");
-        gsap.to(content, {
-          height: inner.offsetHeight,
-          duration: 0.4,
-          ease: "power2.inOut",
-        });
+      if (isOpen) {
+        closeAccordionItem(item);
       } else {
-        item.classList.remove("is-open");
-        gsap.to(content, { height: 0, duration: 0.4, ease: "power2.inOut" });
+        openAccordionItem(item);
       }
     });
   });
+
+  if (tabTriggers.length) {
+    const initialActiveTab =
+      tabTriggers.find((trigger) => trigger.classList.contains("active")) ||
+      tabTriggers[0];
+    activateTab(initialActiveTab);
+  }
 });

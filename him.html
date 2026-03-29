@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en-ZA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>HIM Vault | Sudo Reset</title>
+    <meta
+      name="description"
+      content="A private, password-protected chapter designed as an interactive vault for HIM."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/him.css" />
+  </head>
+
+  <body class="container-cursor-1 him-theme">
+    <main class="page-container">
+      <header class="site-header">
+        <div class="nav-bracket">
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="primary-nav"
+            aria-label="Open navigation menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <nav class="main-nav" id="primary-nav">
+            <div class="nav-wire">
+              <ul>
+                <li>
+                  <a
+                    href="index.html#me"
+                    class="nav-pill cursor-hover-item"
+                    data-cursor-text=" ME "
+                    data-cursor-text-repeat="4"
+                    >Me</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="family.html"
+                    class="nav-pill cursor-hover-item"
+                    data-cursor-text=" FAMILY "
+                    data-cursor-text-repeat="3"
+                    >My family</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="bff.html"
+                    class="nav-pill cursor-hover-item"
+                    data-cursor-text=" BFF "
+                    data-cursor-text-repeat="4"
+                    >My BFF</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#him"
+                    class="nav-pill active cursor-hover-item"
+                    data-cursor-text=" HIM "
+                    data-cursor-text-repeat="4"
+                    >HIM</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <section class="vault-app" id="him" aria-label="HIM private vault">
+        <div class="vault-lock" id="vault-lock" aria-live="polite">
+          <p class="vault-kicker">Private Chapter</p>
+          <h1>Enter The Password To Open His Vault</h1>
+          <p class="vault-subtitle">
+            This page is intentionally private. No accounts, no backend, just a
+            personal passphrase gate and a memory app behind it.
+          </p>
+
+          <form class="vault-form" id="vault-form">
+            <label for="vault-password">Passphrase</label>
+            <div class="vault-input-row">
+              <input
+                id="vault-password"
+                name="vault-password"
+                type="password"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="Type the private word"
+                required
+              />
+              <button type="submit" class="unlock-btn">Unlock</button>
+            </div>
+          </form>
+
+          <div class="vault-feedback" id="vault-feedback">Awaiting passphrase.</div>
+
+          <div class="vault-hints">
+            <div class="hints-header">
+              <span>Hint Console</span>
+              <button type="button" id="hint-btn" class="hint-btn">Show Hint</button>
+            </div>
+            <p id="hint-output">Hints appear here when needed.</p>
+          </div>
+
+          <div class="attempt-meter" id="attempt-meter" aria-label="Attempt meter">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+
+        <div class="vault-main" id="vault-main" hidden>
+          <aside class="app-sidebar">
+            <p class="app-label">HIM OS</p>
+            <h2>Memory System</h2>
+            <p>
+              Curated modules, private notes, and future plans. Built like an
+              app on purpose.
+            </p>
+
+            <div class="module-tabs" role="tablist" aria-label="HIM modules">
+              <button class="module-tab active" data-panel="panel-map" role="tab" aria-selected="true">Memory Map</button>
+              <button class="module-tab" data-panel="panel-reasons" role="tab" aria-selected="false">Why Him</button>
+              <button class="module-tab" data-panel="panel-letter" role="tab" aria-selected="false">Future Letter</button>
+            </div>
+          </aside>
+
+          <div class="app-panels">
+            <section class="module-panel active" id="panel-map" role="tabpanel">
+              <h3>Memory Map</h3>
+              <div class="memory-layers">
+                <figure class="memory-card large">
+                  <img src="design%20assets/currentColor/image.png" alt="Romantic memory portrait" loading="lazy" />
+                  <figcaption>The day everything felt certain.</figcaption>
+                </figure>
+                <figure class="memory-card tall">
+                  <img src="design%20assets/currentColor/image.png" alt="Special day together" loading="lazy" />
+                </figure>
+                <figure class="memory-card wide">
+                  <img src="design%20assets/currentColor/image.png" alt="Couple memory timeline moment" loading="lazy" />
+                </figure>
+              </div>
+            </section>
+
+            <section class="module-panel" id="panel-reasons" role="tabpanel" hidden>
+              <h3>Why Him</h3>
+              <ul class="reason-list">
+                <li>
+                  <span>01</span>
+                  <p>He brings peace where there could be noise.</p>
+                </li>
+                <li>
+                  <span>02</span>
+                  <p>He is patient with my process, not only my wins.</p>
+                </li>
+                <li>
+                  <span>03</span>
+                  <p>He listens deeply and remembers the small details.</p>
+                </li>
+                <li>
+                  <span>04</span>
+                  <p>He is the kind of person I can build a life with.</p>
+                </li>
+              </ul>
+            </section>
+
+            <section class="module-panel" id="panel-letter" role="tabpanel" hidden>
+              <h3>Future Letter</h3>
+              <article class="future-letter">
+                <p>To us,</p>
+                <p>
+                  I hope we always protect this soft, honest space we built.
+                  May our home be full of laughter, patience, and prayer.
+                </p>
+                <p>
+                  Even when life gets loud, let us keep choosing each other with
+                  intention.
+                </p>
+                <p class="signature">Always, me.</p>
+              </article>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-line"></div>
+        <div class="footer-content">
+          <span>PRIVATE VAULT</span>
+          <span>HIM CHAPTER</span>
+          <span>PRIVATE VAULT</span>
+        </div>
+      </footer>
+    </main>
+
+    <div class="cursor cursor--small"></div>
+    <div class="cursor cursor--large"></div>
+    <div class="cursor cursor--text">
+      <div class="text"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="javascript/global.js" defer></script>
+    <script src="javascript/him.js" defer></script>
+  </body>
+</html>
