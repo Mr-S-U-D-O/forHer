@@ -15,7 +15,7 @@ body {
 .site-header {
   display: flex;
   justify-content: center;
-  margin-bottom: 4.5rem;
+  margin-bottom: 5rem;
   position: relative;
   z-index: 10;
 }
@@ -92,6 +92,7 @@ body {
   right: calc(var(--wire-offset) * -1);
   height: var(--wire-thickness);
   background-color: var(--wire-color);
+  border-radius: var(--wire-corner-radius);
   transform: translateY(calc(var(--wire-thickness) * -1));
   z-index: 0;
   pointer-events: none;
@@ -123,7 +124,7 @@ body {
   height: var(--wire-drop-height);
   border-left: var(--wire-thickness) solid var(--wire-color);
   border-right: var(--wire-thickness) solid var(--wire-color);
-  border-radius: var(--radius) var(--radius) 0 0;
+  border-radius: var(--wire-corner-radius) var(--wire-corner-radius) 0 0;
   z-index: 0;
   pointer-events: none;
 }
@@ -132,6 +133,7 @@ body {
   display: flex;
   align-items: center;
   gap: var(--wire-gap);
+  list-style: none;
   margin: 0;
   padding: 0;
 }
@@ -592,12 +594,12 @@ body {
 
 @media (max-width: 768px) {
   .page-container {
-    padding: 0 1.5rem 2.5rem;
+    padding: 0 1.5rem 2rem 1.5rem;
   }
 
   .site-header {
     justify-content: flex-end;
-    margin-bottom: 3rem;
+    margin-bottom: 3.2rem;
   }
 
   .nav-bracket {
@@ -610,7 +612,10 @@ body {
   }
 
   .nav-wire::before,
-  .nav-wire::after,
+  .nav-wire::after {
+    display: none;
+  }
+
   .main-nav::before {
     display: none;
   }
