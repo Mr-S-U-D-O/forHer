@@ -204,6 +204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Shared heading reveals for each chapter block.
   [
+    ".roots-section",
     ".origin-section",
     ".journey-section",
     ".timeline-section",
@@ -252,6 +253,59 @@ document.addEventListener("DOMContentLoaded", async () => {
       { opacity: 1, y: 0, duration: 0.85, ease: "power2.out" },
       "-=0.35",
     );
+
+  // Root story cards reveal in a light stagger to set the pre-UJ tone.
+  gsap.fromTo(
+    ".roots-card",
+    { opacity: 0, y: 26, rotate: (idx) => (idx % 2 === 0 ? -1.2 : 1.2) },
+    {
+      opacity: 1,
+      y: 0,
+      rotate: 0,
+      duration: 0.85,
+      stagger: 0.14,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".roots-section",
+        start: "top 82%",
+        toggleActions: "play none none reverse",
+      },
+    },
+  );
+
+  gsap.fromTo(
+    ".inner-page-entry",
+    { opacity: 0, y: 20, x: -15 },
+    {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      duration: 0.75,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".inner-page-entry",
+        start: "top 88%",
+        toggleActions: "play none none reverse",
+      },
+    },
+  );
+
+  gsap.fromTo(
+    ".entry-button",
+    { opacity: 0, scale: 0.92 },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 0.6,
+      delay: 0.15,
+      ease: "back.out(1.2)",
+      scrollTrigger: {
+        trigger: ".inner-page-entry",
+        start: "top 88%",
+        toggleActions: "play none none reverse",
+      },
+    },
+  );
 
   // Chapter 03: main journey reveal + photo strip cascade.
   const journeyTl = gsap.timeline({

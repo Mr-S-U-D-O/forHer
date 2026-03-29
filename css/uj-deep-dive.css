@@ -1,0 +1,966 @@
+/* UJ DEEP DIVE PAGE — UNIQUE LAYOUT SYSTEM */
+
+.uj-hero-section {
+  position: relative;
+  height: 85vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 6rem 4rem 4rem;
+  overflow: hidden;
+}
+
+.uj-hero-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.uj-hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+.uj-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(219, 193, 230, 0.3) 0%,
+    rgba(163, 42, 214, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.uj-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.uj-chapter-tag {
+  font-size: 0.85rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.uj-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -1.2px;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  color: var(--color-primary);
+}
+
+.uj-hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.uj-hero-desc {
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 550px;
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 01: LECTURERS */
+
+.uj-lecturers-section {
+  padding: 5rem 4rem;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(163, 42, 214, 0.03) 100%
+  );
+}
+
+.uj-lecturers-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+.section-intro-text {
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+.lecturers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.lecturer-card {
+  border: var(--border);
+  padding: 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(163, 42, 214, 0.08) 0%,
+    rgba(219, 193, 230, 0.12) 100%
+  );
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.lecturer-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--color-secondary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.lecturer-card:hover::before {
+  transform: scaleX(1);
+}
+
+.lecturer-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.lecturer-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.lecturer-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-primary);
+}
+
+.lecturer-role {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.lecturer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lecturer-content p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.lecturer-impact {
+  font-size: 0.8rem;
+  padding: 0.8rem;
+  background: rgba(163, 42, 214, 0.1);
+  border-left: 3px solid var(--color-secondary);
+  padding-left: 0.8rem;
+  font-style: italic;
+  color: var(--color-secondary);
+}
+
+.lecturer-influence {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+  font-weight: 700;
+  padding: 0.6rem 1rem;
+  background: rgba(163, 42, 214, 0.15);
+  border-radius: 20px;
+  text-align: center;
+}
+
+.lecturer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 8px 12px 20px rgba(50, 12, 64, 0.15);
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 02: SEMESTERS & MODULES */
+
+.uj-semesters-section {
+  padding: 5rem 4rem;
+}
+
+.uj-semesters-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.semester-block {
+  margin-bottom: 4rem;
+  padding: 2.5rem;
+  border: var(--border);
+  background: linear-gradient(
+    180deg,
+    rgba(219, 193, 230, 0.08) 0%,
+    rgba(163, 42, 214, 0.03) 100%
+  );
+}
+
+.semester-header {
+  margin-bottom: 2rem;
+}
+
+.semester-marker {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--color-secondary);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: rgba(163, 42, 214, 0.15);
+  border-radius: 20px;
+}
+
+.semester-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.semester-desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Module Cards: Offset staggered grid layout */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.modules-grid .module-card:nth-child(2n) {
+  margin-top: 1.5rem;
+}
+
+.module-card {
+  border: var(--border);
+  padding: 1.5rem;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.module-card::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--color-secondary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.module-card:hover::before {
+  transform: scaleX(1);
+}
+
+.module-marker {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-secondary);
+  padding: 0.3rem 0.8rem;
+  width: fit-content;
+  border-radius: 3px;
+}
+
+.module-foundational .module-marker {
+  background: rgba(163, 42, 214, 0.7);
+}
+
+.module-specialized .module-marker {
+  background: rgba(163, 42, 214, 0.85);
+}
+
+.module-advanced .module-marker {
+  background: var(--color-secondary);
+}
+
+.module-card h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.module-card p {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.module-challenge {
+  font-size: 0.75rem;
+  padding: 0.6rem;
+  background: rgba(163, 42, 214, 0.08);
+  border-left: 2px solid var(--color-secondary);
+  padding-left: 0.8rem;
+  font-style: italic;
+}
+
+.module-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0 rgba(50, 12, 64, 0.1);
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 03: LAB WORK */
+
+.uj-lab-section {
+  padding: 5rem 4rem;
+  background: linear-gradient(
+    180deg,
+    rgba(219, 193, 230, 0.1) 0%,
+    transparent 100%
+  );
+}
+
+.uj-lab-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.lab-intro-box {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  padding: 2rem;
+  border: var(--border);
+  background: rgba(219, 193, 230, 0.08);
+}
+
+.lab-intro-box p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.lab-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.lab-showcase-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.lab-item-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.lab-item-2 .lab-content {
+  order: 1;
+}
+
+.lab-item-2 .lab-image {
+  order: 2;
+}
+
+.lab-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.lab-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.lab-showcase-item:hover .lab-image img {
+  transform: scale(1.08);
+}
+
+.lab-content h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.lab-technique {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.lab-content p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 1024px) {
+  .lab-showcase-item,
+  .lab-item-2 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .lab-item-2 .lab-content {
+    order: 0;
+  }
+
+  .lab-item-2 .lab-image {
+    order: 0;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 04: PROJECTS */
+
+.uj-projects-section {
+  padding: 5rem 4rem;
+}
+
+.uj-projects-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.project-card {
+  border: var(--border);
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(219, 193, 230, 0.08) 0%,
+    rgba(163, 42, 214, 0.05) 100%
+  );
+}
+
+.project-header {
+  background: rgba(163, 42, 214, 0.1);
+  padding: 1.5rem 2rem;
+  border-bottom: var(--border);
+}
+
+.project-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.2px;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.project-semester {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.project-body {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.project-challenge,
+.project-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.challenge-label,
+.result-label {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+.project-challenge p:not(.challenge-label),
+.project-result p:not(.result-label) {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.project-image {
+  grid-column: 1 / -1;
+  position: relative;
+  height: 250px;
+  border: var(--border);
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .project-body {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 05: SKILLS PROGRESSION */
+
+.uj-skills-section {
+  padding: 5rem 4rem;
+  background: linear-gradient(
+    180deg,
+    rgba(219, 193, 230, 0.1) 0%,
+    rgba(163, 42, 214, 0.05) 100%
+  );
+}
+
+.uj-skills-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.skills-progression {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+.skill-domain {
+  border: var(--border);
+  padding: 2rem;
+  background: #fff;
+}
+
+.skill-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-secondary);
+  margin-bottom: 1.5rem;
+  display: block;
+  border-bottom: var(--border);
+  padding-bottom: 1rem;
+}
+
+.skill-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skill-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.skill-bar {
+  height: 6px;
+  background: rgba(163, 42, 214, 0.1);
+  border: 1px solid rgba(163, 42, 214, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--color-secondary) 0%,
+    var(--color-secondary) 80%,
+    rgba(163, 42, 214, 0.6) 100%
+  );
+  transition: width 0.8s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 06: BREAKTHROUGH */
+
+.uj-breakthrough-section {
+  padding: 6rem 4rem;
+  background: linear-gradient(
+    135deg,
+    rgba(163, 42, 214, 0.12) 0%,
+    rgba(219, 193, 230, 0.15) 100%
+  );
+  border-top: var(--border);
+  border-bottom: var(--border);
+}
+
+.breakthrough-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.breakthrough-marker {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-secondary);
+  font-weight: 700;
+  text-align: center;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.breakthrough-content h2 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.breakthrough-narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.breakthrough-narrative p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 07: REFLECTION */
+
+.uj-reflection-section {
+  padding: 5rem 4rem;
+}
+
+.uj-reflection-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.reflection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.reflection-point {
+  border: var(--border);
+  padding: 1.8rem;
+  background: linear-gradient(
+    135deg,
+    rgba(219, 193, 230, 0.12) 0%,
+    rgba(163, 42, 214, 0.06) 100%
+  );
+}
+
+.reflection-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+}
+
+.reflection-point p {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.reflection-closing {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: var(--border);
+  text-align: center;
+  background: rgba(163, 42, 214, 0.08);
+}
+
+.reflection-closing p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* CTA SECTION */
+
+.uj-nav-section {
+  padding: 4rem;
+  text-align: center;
+  border-top: var(--border);
+}
+
+.uj-nav-section h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+}
+
+.uj-nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.nav-cta-button {
+  padding: 1rem 2.5rem;
+  border: var(--border);
+  background: var(--color-secondary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: var(--shadow-soft);
+}
+
+.nav-cta-button:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 rgba(50, 12, 64, 0.2);
+  background: var(--color-primary);
+}
+
+.nav-back {
+  background: var(--color-primary);
+}
+
+.nav-back:hover {
+  background: var(--color-secondary);
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* RESPONSIVE */
+
+@media (max-width: 1024px) {
+  .uj-hero-section {
+    height: 70vh;
+    padding: 4rem 2rem 3rem;
+  }
+
+  .uj-lecturers-section,
+  .uj-semesters-section,
+  .uj-lab-section,
+  .uj-projects-section,
+  .uj-skills-section,
+  .uj-reflection-section,
+  .uj-nav-section {
+    padding: 4rem 2rem;
+  }
+
+  .lecturers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .semester-block {
+    padding: 1.5rem;
+  }
+
+  .modules-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .uj-hero-section {
+    height: 60vh;
+    padding: 2rem;
+  }
+
+  .uj-hero-title {
+    font-size: 2rem;
+  }
+
+  .uj-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .uj-hero-desc {
+    font-size: 0.85rem;
+  }
+
+  .lecturers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .lecturer-card {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .lecturer-icon {
+    font-size: 2rem;
+  }
+
+  .modules-grid .module-card:nth-child(2n) {
+    margin-top: 0;
+  }
+
+  .reflection-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .section-intro-text {
+    font-size: 0.85rem;
+  }
+
+  .nav-cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.75rem;
+  }
+}

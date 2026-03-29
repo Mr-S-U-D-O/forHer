@@ -494,6 +494,135 @@ body {
   padding-top: 2rem;
 }
 
+/*
+=========================|
+    ROOTS CHAPTER        |
+=========================|
+*/
+
+.roots-section {
+  margin-top: 8rem;
+  padding-top: 2rem;
+}
+
+.roots-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.roots-card {
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 6px 6px 0 rgba(50, 12, 64, 0.12);
+}
+
+.roots-card-main,
+.roots-card-highlight {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.46),
+    rgba(165, 42, 214, 0.16)
+  );
+}
+
+.roots-label {
+  display: inline-block;
+  border: var(--border);
+  border-radius: 999px;
+  padding: 0.22rem 0.7rem;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  font-family: var(--font-heading);
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 0.7rem;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.roots-card h3 {
+  color: var(--primary-color);
+  font-size: 1.45rem;
+  margin-bottom: 0.7rem;
+}
+
+.roots-card p {
+  color: var(--text-muted);
+  line-height: 1.62;
+}
+
+.roots-bridge {
+  margin-top: 1rem;
+  border-left: 4px solid var(--primary-color);
+  padding: 0.8rem 0 0.8rem 1rem;
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  max-width: 80ch;
+}
+
+/*
+=========================|
+   INNER PAGE ENTRIES    |
+=========================|
+*/
+
+.inner-page-entry {
+  margin-top: 2rem;
+  padding: 1.2rem;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: rgba(165, 42, 214, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.entry-label {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  letter-spacing: 1.2px;
+  color: var(--primary-color);
+  margin: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.entry-button {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  font-family: var(--font-heading);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all var(--transition-speed) ease;
+  cursor: pointer;
+}
+
+.entry-button:hover {
+  background-color: var(--secondary-color);
+  box-shadow: 4px 4px 0 rgba(50, 12, 64, 0.15);
+  transform: translateY(-2px);
+}
+
+.entry-button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.entry-hint {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0;
+  font-style: italic;
+}
+
 .origin-redesign {
   display: grid;
   grid-template-columns: 1.05fr 1.4fr;
@@ -829,8 +958,20 @@ body {
   box-shadow: -8px 8px 0 rgba(50, 12, 64, 0.14);
 }
 
+/*
+=========================|
+   ME STORY ENTRY MAP    |
+   (Removed - moved to   |
+   inline entries)       |
+=========================|
+*/
+
 /* Responsive */
 @media (max-width: 850px) {
+  .roots-layout {
+    grid-template-columns: 1fr;
+  }
+
   .journey-grid {
     grid-template-columns: 1fr;
     gap: 3rem;

@@ -1,0 +1,976 @@
+/* SCHOOL YEARS PAGE — UNIQUE LAYOUT SYSTEM */
+
+.school-hero-section {
+  position: relative;
+  height: 85vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 6rem 4rem 4rem;
+  overflow: hidden;
+}
+
+.school-hero-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.school-hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+.school-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(219, 193, 230, 0.95) 0%,
+    rgba(163, 42, 214, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+.school-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.school-chapter-tag {
+  font-size: 0.85rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.school-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -1.2px;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  color: var(--color-primary);
+}
+
+.school-hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.school-hero-desc {
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 550px;
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION MARKER */
+
+.school-section-marker {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1.2rem;
+  border: var(--border);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  background: rgba(219, 193, 230, 0.3);
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 01: PRIMARY SCHOOL */
+
+.school-primary-section {
+  padding: 5rem 4rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(163, 42, 214, 0.03) 100%);
+}
+
+.primary-split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.primary-timeline-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.primary-era-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.primary-timeline-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.timeline-dot {
+  padding: 1.5rem;
+  border-left: 4px solid var(--color-secondary);
+  padding-left: 2rem;
+  position: relative;
+}
+
+.timeline-dot::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 1.2rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  border: 3px solid var(--color-bg);
+}
+
+.dot-label {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-secondary);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.dot-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Primary photo grid: hero + pair */
+.primary-photo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.primary-photo-hero {
+  position: relative;
+  border: var(--border);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-soft);
+}
+
+.primary-photo-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-smooth);
+}
+
+.primary-photo-hero figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(50, 12, 64, 0.9) 100%);
+  padding: 2rem 1rem 1rem;
+  font-size: 0.85rem;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.primary-photo-hero:hover figcaption {
+  opacity: 1;
+}
+
+.primary-photo-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.primary-photo-small {
+  border: var(--border);
+  overflow: hidden;
+  aspect-ratio: 1;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+
+.primary-photo-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.primary-photo-small:hover img {
+  transform: scale(1.08);
+}
+
+/* Insight Box: 4-column grid */
+.section-insight-box {
+  margin-top: 4rem;
+  padding: 2.5rem;
+  background: rgba(163, 42, 214, 0.06);
+  border: var(--border);
+  border-radius: 0;
+}
+
+.insight-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.insight-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.insight-label {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+}
+
+.insight-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 02: HIGH SCHOOL */
+
+.school-secondary-section {
+  padding: 5rem 4rem;
+  background: linear-gradient(180deg, rgba(219, 193, 230, 0.15) 0%, transparent 100%);
+}
+
+.secondary-intro-block {
+  max-width: 750px;
+  margin-bottom: 4rem;
+}
+
+.secondary-intro-block h2 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.secondary-intro-block p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* Grade progression: vertical stacked cards */
+.grade-progression {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.grade-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  border: var(--border);
+  background: linear-gradient(
+    135deg,
+    rgba(219, 193, 230, 0.08) 0%,
+    rgba(163, 42, 214, 0.03) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.grade-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-secondary) 0%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.grade-card:hover::before {
+  opacity: 1;
+}
+
+.grade-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-right: 2px solid var(--color-secondary);
+  padding-right: 2rem;
+  text-align: left;
+}
+
+.grade-number {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--color-secondary);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.grade-age {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-secondary);
+  opacity: 0.8;
+}
+
+.grade-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grade-content h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-primary);
+}
+
+.grade-content p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.grade-photo {
+  width: 100%;
+  height: 180px;
+  border: var(--border);
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.grade-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.grade-card:hover .grade-photo img {
+  transform: scale(1.05);
+}
+
+.grade-key-moment {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--color-secondary);
+  padding: 0.8rem 1rem;
+  background: rgba(163, 42, 214, 0.08);
+  border-left: 3px solid var(--color-secondary);
+  padding-left: 1rem;
+}
+
+/* Responsive: grade card becomes full column on smaller screens */
+@media (max-width: 1024px) {
+  .grade-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .grade-header {
+    border-right: none;
+    border-bottom: 2px solid var(--color-secondary);
+    padding-right: 0;
+    padding-bottom: 1rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .grade-number {
+    font-size: 1.4rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 03: FRIENDSHIPS */
+
+.school-friendships-section {
+  padding: 5rem 4rem;
+}
+
+.school-friendships-section .section-heading-large {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.friendship-profiles {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.friend-profile {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 2rem;
+  border: var(--border);
+  background: linear-gradient(
+    135deg,
+    rgba(163, 42, 214, 0.05) 0%,
+    rgba(219, 193, 230, 0.1) 100%
+  );
+  position: relative;
+}
+
+.friend-profile-2 {
+  grid-template-columns: 1fr 280px;
+}
+
+.friend-profile-2 .friend-content-side {
+  grid-column: 1 / -1;
+  display: contents;
+}
+
+/* Alternating layout helper */
+.friend-profile-1 .friend-content-side {
+  order: 2;
+}
+
+.friend-profile-1 .friend-photo-side {
+  order: 1;
+}
+
+.friend-profile-2 .friend-photo-side {
+  order: 2;
+}
+
+.friend-profile-3 .friend-content-side {
+  order: 2;
+}
+
+.friend-profile-3 .friend-photo-side {
+  order: 1;
+}
+
+.friend-photo-side {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border: var(--border);
+}
+
+.friend-photo-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.friend-profile:hover .friend-photo-side img {
+  transform: scale(1.08);
+}
+
+.friend-content-side h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.friend-role {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.friend-content-side p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.friend-impact {
+  font-size: 0.85rem;
+  padding: 1rem;
+  background: rgba(163, 42, 214, 0.08);
+  border-left: 3px solid var(--color-secondary);
+  font-style: italic;
+  color: var(--color-secondary);
+}
+
+@media (max-width: 1024px) {
+  .friend-profile,
+  .friend-profile-2 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .friend-photo-side {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 04: ACHIEVEMENTS WALL */
+
+.school-achievements-section {
+  padding: 5rem 4rem;
+  background: linear-gradient(
+    180deg,
+    rgba(219, 193, 230, 0.1) 0%,
+    rgba(163, 42, 214, 0.03) 100%
+  );
+}
+
+.school-achievements-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: var(--color-primary);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.achievement-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.achievement-card {
+  border: var(--border);
+  padding: 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(163, 42, 214, 0.08) 0%,
+    rgba(219, 193, 230, 0.15) 100%
+  );
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.achievement-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(163, 42, 214, 0.1);
+  transition: left 0.5s ease;
+  z-index: 0;
+}
+
+.achievement-card:hover::before {
+  left: 0;
+}
+
+.achievement-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.achievement-icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.achievement-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-primary);
+}
+
+.achievement-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: center;
+}
+
+.achievement-stat {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.achievement-detail p:last-child {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 05: AMBITION SHIFT */
+
+.school-ambition-shift-section {
+  padding: 5rem 4rem;
+}
+
+.ambition-shift-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.ambition-shift-column h2 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.4px;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.ambition-shift-column p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.ambition-shift-visuals {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.ambition-shift-photo-block {
+  position: relative;
+  overflow: hidden;
+  border: var(--border);
+  aspect-ratio: 3 / 4;
+}
+
+.ambition-shift-photo-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.ambition-shift-photo-block:hover img {
+  transform: scale(1.06);
+}
+
+.photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(50, 12, 64, 0.95) 60%);
+  color: #fff;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.ambition-values-list {
+  border: var(--border);
+  padding: 2rem;
+  background: rgba(219, 193, 230, 0.08);
+}
+
+.values-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-secondary);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.values-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.values-list li {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.values-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .ambition-shift-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* SECTION 06: REFLECTION */
+
+.school-reflection-section {
+  padding: 5rem 4rem;
+  background: linear-gradient(
+    135deg,
+    rgba(163, 42, 214, 0.08) 0%,
+    rgba(219, 193, 230, 0.12) 100%
+  );
+}
+
+.reflection-quote-block {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.reflection-quote {
+  font-family: var(--font-main);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-primary);
+  font-style: italic;
+  position: relative;
+  padding: 2rem;
+}
+
+.reflection-quote::before {
+  content: "";
+  font-size: 3rem;
+  color: var(--color-secondary);
+  opacity: 0.3;
+  position: absolute;
+  top: -10px;
+  left: 0;
+}
+
+.reflection-final-words {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.reflection-final-words p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* CTA SECTION */
+
+.school-nav-section {
+  padding: 4rem;
+  text-align: center;
+  border-top: var(--border);
+}
+
+.school-nav-section h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+}
+
+.school-nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.nav-cta-button {
+  padding: 1rem 2.5rem;
+  border: var(--border);
+  background: var(--color-secondary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: var(--shadow-soft);
+}
+
+.nav-cta-button:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 rgba(50, 12, 64, 0.2);
+  background: var(--color-primary);
+}
+
+.nav-back {
+  background: var(--color-primary);
+}
+
+.nav-back:hover {
+  background: var(--color-secondary);
+}
+
+/* ─────────────────────────────────────────────────────────────────── */
+/* RESPONSIVE */
+
+@media (max-width: 1024px) {
+  .school-hero-section {
+    height: 70vh;
+    padding: 4rem 2rem 3rem;
+  }
+
+  .school-primary-section,
+  .school-secondary-section,
+  .school-friendships-section,
+  .school-achievements-section,
+  .school-ambition-shift-section,
+  .school-nav-section {
+    padding: 4rem 2rem;
+  }
+
+  .primary-split-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .grade-progression {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .school-hero-section {
+    height: 60vh;
+    padding: 2rem;
+  }
+
+  .school-hero-title {
+    font-size: 2rem;
+  }
+
+  .school-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .school-hero-desc {
+    font-size: 0.85rem;
+  }
+
+  .primary-timeline-dots {
+    gap: 1.5rem;
+  }
+
+  .primary-photo-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .achievement-wall {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .nav-cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.75rem;
+  }
+}
