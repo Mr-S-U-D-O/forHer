@@ -1,7 +1,7 @@
 # Website Expansion Plan (Living Document)
 
 Last updated: 2026-03-29
-Status: Phase 1 complete, Phase 2 ready for execution
+Status: Phase 2 active (navigation complete, family build pending)
 Owner: Client project (forHer)
 
 ## Purpose
@@ -151,8 +151,8 @@ Status after this pass:
 
 ### Navigation and routing
 
-- [ ] Add/replace global nav labels and links with final structure.
-- [ ] Ensure nav consistency across all pages.
+- [x] Add/replace global nav labels and links with final structure.
+- [x] Ensure nav consistency across all pages.
 - [ ] Define URL/page naming conventions before creating many files.
 
 ### Core pages (top-level)
@@ -305,47 +305,57 @@ Each page has completely unique layout structure, CSS patterns, and animation ap
 - ✅ All pages responsive (1024px and 768px breakpoints)
 - ✅ All pages use GSAP 3.12.2 + ScrollTrigger animations
 - ✅ Manifest system prepared for photo population
+- ✅ Navigation labels rolled out across existing pages (Me, My Parents, My Sister, My Cousins, My Aunts and Uncles, My Friends, Him)
+- ✅ Shared layout/navigation/footer CSS consolidated into global stylesheet for easier maintenance
 
-## Next Phases (Ready to Begin)
+## Next Phases (Road Ahead)
 
-1. **Photo Population** — Populate images across all 5 pages (index + 4 inner pages) using manifest system
-2. **Navigation Updates** — Update global nav from old labels to: Me, My Parents, My Sister, My Cousins, My Aunts and Uncles, My Friends, Him
-3. **Family System Pages** — Build parent gateway, sister page, cousin/aunt/uncle/friend card systems
-4. **Password Protection** — Implement password gate for Him page
-5. **Data Models** — Create ~40 cousin records + aunt/uncle/friend data
+1. **Photo Population** — Populate images across all 5 Me-flow pages (index + 4 inner pages) using the manifest system.
+2. **Family Vertical Slice** — Build My Parents gateway + Father detail + Mother detail with constrained discoverability.
+3. **Family Data Models** — Create JSON schema and seed data for cousins, aunts/uncles, and friends.
+4. **Scale Family Pages** — Generate cousin/aunt/uncle/friend card grids and detail page routes from data.
+5. **Him Protection Gate** — Implement front-end password flow with clear limitation note.
 
 ## Status
 
 All Me-page architecture and inner pages complete and functional. Ready for phase 2: photo population and family system expansion.
 
-## Immediate Implementation Queue (Phase 2)
+## Sectioned Checkpoint (Now)
 
-1. Navigation pass across all pages
+### Completed
 
-- Replace legacy labels with final labels: Me, My Parents, My Sister, My Cousins, My Aunts and Uncles, My Friends, Him.
-- Ensure nav active states and button opacity are consistent with index design system.
+- Me hub + four inner Me pages are fully built and connected.
+- Navigation labels and links are aligned across all current pages.
+- Nav no-wrap/size tuning has been applied for cleaner desktop alignment.
+- Shared layout/navigation/footer CSS has been centralized in the global stylesheet.
+- School Years "Coming Soon" blocker has been removed and links forward correctly.
 
-2. Photo population pass
+### In Progress
 
-- Fill image slots for index + all four inner Me pages.
-- Validate image crops, file sizes, and mobile rendering.
+- Phase 2 execution has started with infrastructure cleanup complete.
+- Content population (real images + person data) is the active production focus.
 
-3. Family vertical slice
+### Next Route
 
-- Build My Parents gateway page.
-- Build Father and Mother detail pages with constrained discoverability from My Parents only.
-
-4. Data model kickoff
-
-- Create initial JSON schemas for cousins, aunts/uncles, and friends.
-- Seed with first batch records so card rendering can be tested.
-
-5. Protected page setup
-
-- Implement front-end password gate for Him page with clear UX and limitations documented.
+1. Populate image slots on index + origin-story + school-years + uj-deep-dive + next-chapter.
+2. Build parents flow (gateway + father page + mother page).
+3. Create family JSON models (cousins, aunts/uncles, friends) and start seeded rendering.
+4. Expand to full family/friends page network using data-driven cards.
+5. Implement Him password gate and document front-end security limits.
 
 ## Readiness Notes
 
 - Inner-page continuity is now enabled from School Years to UJ Deep Dive (removed the previous Coming Soon blocker).
 - Color token mismatches were corrected in new page stylesheets so shared nav styling behavior matches index.
+- Shared CSS consolidation is complete; future style changes can be made from one source.
 - No architecture blockers remain for starting family-system implementation.
+
+## Design Rule: Icon Usage
+
+- Emoji are forbidden as UI icons across the project.
+- Use text badges, CSS shapes, SVG icons, or image assets for iconography.
+- Exception: Emoji are allowed only when intentionally used as actual emoji in narrative/body copy (not as decorative or functional icons).
+
+## Next Action (Recommended)
+
+Start with Photo Population pass so all completed narrative pages feel finished before family-page expansion.

@@ -94,7 +94,8 @@ function initLecturerAnimations() {
     scrollTrigger: {
       trigger: lecturersSection,
       start: "top 80%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play none none none",
+      once: true,
     },
     duration: 0.7,
     opacity: 0,
@@ -109,7 +110,8 @@ function initLecturerAnimations() {
       scrollTrigger: {
         trigger: lecturersSection,
         start: "top 80%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play none none none",
+        once: true,
       },
       duration: 0.6,
       scale: 0,
@@ -124,7 +126,8 @@ function initLecturerAnimations() {
     scrollTrigger: {
       trigger: lecturersSection,
       start: "top 78%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play none none none",
+      once: true,
     },
     duration: 0.6,
     opacity: 0,
