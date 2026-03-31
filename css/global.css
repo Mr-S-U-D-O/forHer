@@ -39,8 +39,8 @@
   --wire-thickness: 2px;
   --wire-gap: 0.75rem;
   --wire-offset: 2rem;
-  --wire-drop-height: 2rem;
-  --wire-corner-radius: 8px;
+  --wire-drop-height: 1.85rem;
+  /*--wire-corner-radius: px;*/
 }
 
 /* --- THE RESET --- */
